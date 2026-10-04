@@ -429,12 +429,12 @@
     <div class="relative min-h-screen">
 
         
-        <header class="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-ink/70 backdrop-blur-md">
-            <div class="mx-auto flex h-20 max-w-[1600px] items-center justify-between gap-6 px-6 lg:px-12">
+        <header class="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-ink/80 backdrop-blur-sm lg:backdrop-blur-md">
+            <div class="mx-auto flex h-16 lg:h-20 max-w-[1600px] items-center justify-between gap-4 lg:gap-6 px-4 lg:px-12">
 
                 
                 <a href="#home" class="flex shrink-0 items-baseline gap-0.5" aria-label="Rama — Home">
-                    <span class="font-display text-2xl font-black tracking-tighter text-white">RAMA</span>
+                    <span class="font-display text-xl lg:text-2xl font-black tracking-tighter text-white">RAMA</span>
                     <span class="h-2 w-2 bg-accent"></span>
                 </a>
 
@@ -451,7 +451,7 @@
 
                 
                 <div class="flex items-center gap-4">
-                    <a href="Assets/CV/CV_Rama.pdf" download class="hollow-btn hidden px-5 py-2.5 font-mono text-xs uppercase tracking-[0.2em] sm:inline-flex">
+                    <a href="Assets/CV/CV_Rama.pdf" download class="hollow-btn px-4 py-2 font-mono text-[10px] uppercase tracking-[0.2em] sm:px-5 sm:py-2.5 sm:text-xs">
                         VIEW CV
                     </a>
                     <button id="menu-toggle" class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/10 lg:hidden" aria-label="Open menu" aria-expanded="false">
@@ -484,13 +484,13 @@
 
         <main>
             
-            <section id="home" class="relative overflow-hidden pt-28 lg:min-h-screen lg:pt-0">
+            <section id="home" class="relative overflow-hidden pt-20 lg:pt-28 lg:min-h-screen lg:pt-0">
                 
-                <div class="spotlight-top pointer-events-none absolute inset-x-0 top-0 z-0 h-[70vh]"></div>
+                <div class="spotlight-top pointer-events-none absolute inset-x-0 top-0 z-0 h-[50vh] lg:h-[70vh]"></div>
                 <div class="spotlight pointer-events-none absolute inset-0 z-0"></div>
 
                 
-                <div class="pointer-events-none absolute inset-x-0 top-[18vh] z-10 flex justify-center overflow-hidden lg:top-[22vh]">
+                <div class="pointer-events-none absolute inset-x-0 top-[12vh] lg:top-[18vh] z-10 flex justify-center overflow-hidden">
                     <h1 class="select-none whitespace-nowrap font-display text-[21vw] font-black uppercase leading-none tracking-[-0.07em] text-transparent bg-gradient-to-b from-cyan-400 via-indigo-500 to-[#06060F] bg-clip-text lg:text-[18vw]">
                         PORTFOLIO
                     </h1>
@@ -506,6 +506,8 @@
                 
                 <div class="relative z-30 mx-auto w-full max-w-[1600px] px-6 pb-16 pt-16 lg:px-12 lg:pb-0 lg:pt-0">
                     <div class="grid items-end gap-12 lg:min-h-screen lg:grid-cols-2 lg:gap-8 lg:pb-12">
+                        <!-- Mobile: stats first -->
+                        <div class="order-1 lg:order-2 lg:col-start-2">
 
                         
                         <div class="max-w-xl lg:pb-10">
@@ -521,18 +523,18 @@
                                 <span id="type-role">WEB DEVELOPER</span><span class="type-cursor"></span>
                             </p>
 
-                            <p class="mt-7 max-w-md text-sm leading-relaxed text-white/70">
+                            <p class="mt-5 max-w-md text-[14px] sm:text-sm leading-[1.6] text-white/70">
                                 Informatics Engineering student at UIN Maulana Malik Ibrahim Malang — specializing in custom website development and web applications. I build digital products with sharp hierarchy, functional clarity, and one indigo accent that refuses to be ignored.
                             </p>
-                            <p class="mt-4 max-w-md font-mono text-[11px] uppercase leading-relaxed tracking-[0.15em] text-white/45">
+                            <p class="mt-3 max-w-md font-mono text-[10px] sm:text-[11px] uppercase leading-relaxed tracking-[0.15em] text-white/45">
                                 IT Intern @ Garuda Indonesia · GDGOC Core Event Organizer · Batu, East Java — Indonesia
                             </p>
 
-                            <div class="mt-10 flex flex-wrap items-center gap-4">
-                                <a href="Assets/CV/CV_Rama.pdf" download class="hollow-btn px-8 py-4 font-mono text-xs uppercase tracking-[0.25em]">
+                            <div class="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                                <a href="Assets/CV/CV_Rama.pdf" download class="hollow-btn px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] w-full sm:w-auto text-center">
                                     VIEW CV
                                 </a>
-                                <a href="https://www.linkedin.com/in/ramadhani-pasulleri-52922324b/" target="_blank" rel="noopener" class="font-mono text-xs uppercase tracking-[0.25em] text-white/60 transition-colors hover:text-accent">
+                                <a href="https://www.linkedin.com/in/ramadhani-pasulleri-52922324b/" target="_blank" rel="noopener" class="font-mono text-xs uppercase tracking-[0.25em] text-white/60 transition-colors hover:text-accent w-full sm:w-auto text-center py-2">
                                     LINKEDIN ↗
                                 </a>
                             </div>
@@ -541,42 +543,36 @@
                         
                         <div class="ml-auto flex w-full max-w-sm flex-col items-start lg:pb-12">
                             
-                            <div class="w-full rounded-2xl border border-white/10 bg-[#121318]/80 px-6 py-4 text-left shadow-xl backdrop-blur-md">
-                                <p class="font-serif text-sm italic leading-relaxed text-gray-300 sm:text-base">
+                            <div class="w-full max-w-[320px] rounded-2xl border border-white/10 bg-[#121318]/80 px-5 py-3 text-left shadow-xl backdrop-blur-md">
+                                <p class="font-serif text-[13px] sm:text-sm italic leading-relaxed text-gray-300">
                                     "Turning ideas into powerful digital experiences."
                                 </p>
                             </div>
 
                             
-                            <div class="mt-10 flex flex-col gap-8 text-left">
+                            <div class="mt-8 flex flex-col sm:flex-row gap-6 sm:gap-8 text-left w-full">
                                 
-                                <div class="flex items-center gap-4 text-left">
-                                    <span class="font-display text-4xl font-black tracking-tight text-white lg:text-5xl">
+                                <div class="flex items-center gap-3 sm:gap-4 text-left flex-shrink-0">
+                                    <span class="font-display text-3xl sm:text-4xl font-black tracking-tight text-white">
                                         1<span class="text-accent">+</span>
                                     </span>
-                                    <span class="font-mono text-[10px] uppercase leading-tight tracking-widest text-gray-400">
-                                        Years<br>Experience
-                                    </span>
+                                    <span class="font-mono text-[9px] sm:text-[10px] uppercase leading-tight tracking-widest text-gray-400 whitespace-nowrap">Years Exp</span>
                                 </div>
 
                                 
-                                <div class="flex items-center gap-4 text-left">
-                                    <span class="font-display text-4xl font-black tracking-tight text-white lg:text-5xl">
+                                <div class="flex items-center gap-3 sm:gap-4 text-left flex-shrink-0">
+                                    <span class="font-display text-3xl sm:text-4xl font-black tracking-tight text-white">
                                         5<span class="text-accent">+</span>
                                     </span>
-                                    <span class="font-mono text-[10px] uppercase leading-tight tracking-widest text-gray-400">
-                                        Projects<br>Completed
-                                    </span>
+                                    <span class="font-mono text-[9px] sm:text-[10px] uppercase leading-tight tracking-widest text-gray-400 whitespace-nowrap">Projects</span>
                                 </div>
 
                                 
-                                <div class="flex items-center gap-4 text-left">
-                                    <span class="font-display text-4xl font-black tracking-tight text-white lg:text-5xl">
+                                <div class="flex items-center gap-3 sm:gap-4 text-left flex-shrink-0">
+                                    <span class="font-display text-3xl sm:text-4xl font-black tracking-tight text-white">
                                         5<span class="text-accent">+</span>
                                     </span>
-                                    <span class="font-mono text-[10px] uppercase leading-tight tracking-widest text-gray-400">
-                                        Happy<br>Clients
-                                    </span>
+                                    <span class="font-mono text-[9px] sm:text-[10px] uppercase leading-tight tracking-widest text-gray-400 whitespace-nowrap">Clients</span>
                                 </div>
                             </div>
                         </div>
@@ -611,10 +607,19 @@
                                 
                                 <div class="badge-card relative -mt-1 rounded-[28px] border border-white/10 bg-[#0B0B16] p-5 shadow-[0_40px_90px_-20px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.04)]">
                                     <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#06060F]">
-                                        <img src="Assets/Profile/avatar.png" alt="Muhammad Ramadhani Pasulleri — real photo" class="aspect-[4/5] w-full object-cover object-top">
+                                        <img
+                                            src="Assets/Profile/avatar.png"
+                                            alt="Muhammad Ramadhani Pasulleri — real photo"
+                                            class="w-full h-full object-cover object-top rounded-[20px]">
 
                                         
-                                        <div class="absolute left-3 top-3 flex flex-col gap-2">
+                                        <div class="absolute left-3 top-3 flex flex-col gap-2 lg:hidden">
+                                            <span class="tech-chip">PY</span>
+                                            <span class="tech-chip">JS</span>
+                                            <span class="tech-chip">TS</span>
+                                            <span class="tech-chip">⚛</span>
+                                        </div>
+                                        <div class="hidden lg:absolute lg:left-3 lg:top-3 lg:flex lg:flex-col lg:gap-2">
                                             <span class="tech-chip">PY</span>
                                             <span class="tech-chip">JS</span>
                                             <span class="tech-chip">TS</span>
@@ -622,7 +627,7 @@
                                         </div>
 
                                         
-                                        <div class="absolute bottom-3 left-3 right-3 flex h-8 items-end gap-[3px] rounded-md bg-white/95 px-2 py-1">
+                                        <div class="absolute bottom-2 left-2 right-2 flex h-7 items-end gap-[2px] rounded-md bg-white/95 px-1.5 py-0.5">
                                             <span style="width:2px;height:100%;background:#0B0B16"></span>
                                             <span style="width:1px;height:100%;background:#0B0B16"></span>
                                             <span style="width:3px;height:100%;background:#0B0B16"></span>
@@ -659,7 +664,7 @@
                                 <span class="h-px w-16 bg-gradient-to-r from-accent to-transparent"></span>
                             </div>
 
-                            <h3 class="mt-6 font-display text-[clamp(2.4rem,5.5vw,4.6rem)] font-black uppercase leading-[0.88] tracking-tighter text-white">
+                            <h3 class="mt-6 font-display text-[clamp(1.8rem,5vw,3.5rem)] font-black uppercase leading-[0.9] tracking-tighter text-white">
                                 Why Hire Me,<br>
                                 <span class="font-serif italic text-blood">The Vibe Coder</span>
                             </h3>
