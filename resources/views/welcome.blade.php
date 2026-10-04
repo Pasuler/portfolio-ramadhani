@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Muhammad Ramadhani Pasulleri — Web Developer & IT Support. Informatics Engineering student at UIN Maulana Malik Ibrahim Malang.">
+
+    <title>MUHAMMAD RAMADHANI PASULLERI — Web Developer</title>
+
+    <!-- Google Fonts: Inter / Playfair Display / IBM Plex Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN + Inline Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#06060F',
+                        case: '#060608',
+                        accent: '#6366F1',
+                        blood: '#22D3EE',
+                        volt: '#CCFF00'
+                    },
+                    fontFamily: {
+                        display: ['Inter', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['IBM Plex Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ============ BASE / SELECTION ============ */
+        ::selection {
+            background: #6366F1;
+            color: #ffffff;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #06060F;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1c1c20;
+            border: 2px solid #06060F;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366F1;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* ============ LIGHTING SYSTEM ============ */
+        .spotlight {
+            background: radial-gradient(ellipse 90% 62% at 50% -12%,
+                rgba(99, 102, 241, 0.62) 0%,
+                rgba(99, 102, 241, 0.24) 38%,
+                rgba(6, 6, 15, 0) 72%);
+        }
+        .spotlight-top {
+            background: linear-gradient(to bottom,
+                rgba(99, 102, 241, 0.45) 0%,
+                rgba(99, 102, 241, 0.12) 35%,
+                transparent 72%);
+        }
+
+        /* ============ PHOTO MASK ============ */
+        .photo-mask {
+            -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+        }
+
+        /* ============ TYPEWRITER CURSOR ============ */
+        .type-cursor::after {
+            content: '|';
+            margin-left: 2px;
+            color: #6366F1;
+            animation: blink 1s steps(1) infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* ============ NAV ============ */
+        .nav-link {
+            position: relative;
+            color: rgba(255, 255, 255, 0.45);
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 1px;
+            background: #6366F1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-link:hover {
+            color: #ffffff;
+        }
+        .nav-link.is-active {
+            color: #6366F1;
+        }
+        .nav-link.is-active::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* ============ HOLLOW BUTTON (VIEW CV) ============ */
+        .hollow-btn {
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            transition: all 0.35s ease;
+        }
+        .hollow-btn:hover {
+            background: #6366F1;
+            border-color: #6366F1;
+            color: #ffffff;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        /* ============ SOLID ACCENT BUTTON ============ */
+        .accent-btn {
+            background: #6366F1;
+            color: #ffffff;
+            transition: all 0.35s ease;
+        }
+        .accent-btn:hover {
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* ============ FORM INPUTS (DRAWER) ============ */
+        .field-input {
+            width: 100%;
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 0;
+            padding: 0.8rem 0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .field-input:focus {
+            border-color: #6366F1;
+        }
+        .field-input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+        select.field-input option {
+            background: #0B0B16;
+            color: #ffffff;
+        }
+
+        /* ============ SCROLL REVEAL ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition:
+                opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ CASE STUDY ============ */
+        .case-mock {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+        }
+        .case-mock:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 80px rgba(99, 102, 241, 0.35);
+        }
+        .case-mock.is-featured {
+            transform: translateY(-10px);
+            box-shadow: 0 34px 90px rgba(204, 255, 0, 0.18);
+        }
+        .case-nav-link {
+            color: rgba(255, 255, 255, 0.3);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .case-nav-link:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .case-nav-link.is-active {
+            color: #ffffff;
+            transform: translateX(6px);
+        }
+        .case-gallery-img {
+            cursor: pointer;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+        }
+        .case-gallery-img:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        /* ============ CASE STUDY LIGHTBOX ============ */
+        .case-zoom {
+            cursor: zoom-in;
+        }
+        /* Horizontal project slider */
+        .scrollbar-none {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ============ ABOUT — 3D ID BADGE ============ */
+        .badge-card {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+        }
+        .badge-wrap:hover .badge-card {
+            transform: translateY(-8px) rotate(-1.5deg);
+            box-shadow: 0 55px 110px -22px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(204, 255, 0, 0.18);
+        }
+        .tech-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 26px;
+            border-radius: 8px;
+            background: rgba(6, 6, 15, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #CCFF00;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            backdrop-filter: blur(4px);
+        }
+        .social-block {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #6366F1;
+            color: #ffffff;
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.32);
+            transform: rotate(-6deg) skewX(-2deg);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, background 0.35s ease;
+        }
+        .social-block:nth-child(2) { transform: rotate(4deg) skewX(2deg); }
+        .social-block:nth-child(3) { transform: rotate(-3deg) skewX(3deg); }
+        .social-block:nth-child(4) { transform: rotate(5deg) skewX(-3deg); }
+        .social-block:nth-child(5) { transform: rotate(-5deg) skewX(-1deg); }
+        .social-block:hover {
+            transform: rotate(0deg) skewX(0deg) translateY(-3px);
+            background: #CCFF00;
+            color: #06060F;
+            box-shadow: 0 18px 44px rgba(204, 255, 0, 0.3);
+        }
+        .cert-thumb {
+            width: 220px;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+        }
+        .cert-thumb:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.55);
+        }
+
+        /* ============ LINE CLAMP ============ */
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        #lightbox {
+            background: rgba(3, 3, 6, 0.92);
+            backdrop-filter: blur(10px);
+        }
+        #lightbox img {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+        }
+        .lightbox-btn {
+            transition: all 0.3s ease;
+        }
+        .lightbox-btn:hover {
+            color: #CCFF00;
+            transform: scale(1.1);
+        }
+        .lightbox-dot {
+            transition: all 0.3s ease;
+        }
+        .lightbox-dot.is-active {
+            background: #CCFF00;
+            width: 1.75rem;
+        }
+
+        /* ============ REDUCED MOTION ============ */
+        @media (prefers-reduced-motion: reduce) {
+            .type-cursor::after { animation: none; }
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .scroll-smooth { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+
+<body class="bg-ink font-sans text-white antialiased selection:bg-accent selection:text-white">
+    <div class="relative min-h-screen">
+
+        {{-- ================================================================
+        STICKY HEADER
+        ================================================================ --}}
+        <header class="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-ink/70 backdrop-blur-md">
+            <div class="mx-auto flex h-20 max-w-[1600px] items-center justify-between gap-6 px-6 lg:px-12">
+
+                {{-- Brand --}}
+                <a href="#home" class="flex shrink-0 items-baseline gap-0.5" aria-label="Rama — Home">
+                    <span class="font-display text-2xl font-black tracking-tighter text-white">RAMA</span>
+                    <span class="h-2 w-2 bg-accent"></span>
+                </a>
+
+                {{-- Center: Main Menu --}}
+                <nav class="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.2em] lg:flex" aria-label="Main navigation">
+                    <a href="#home" class="nav-link is-active">HOME</a>
+                    <a href="#about" class="nav-link">ABOUT</a>
+                    <a href="#work" class="nav-link">WORK</a>
+                    <a href="#portfolio" class="nav-link">PORTFOLIO</a>
+                    <a href="#experience" class="nav-link">EXPERIENCE</a>
+                    <a href="#services" class="nav-link">SERVICES</a>
+                    <a href="#contact" class="nav-link">CONTACT</a>
+                </nav>
+
+                {{-- Right: CTA + Mobile Toggle --}}
+                <div class="flex items-center gap-4">
+                    <a href="{{ asset('Assets/CV/CV_Rama.pdf') }}" download class="hollow-btn hidden px-5 py-2.5 font-mono text-xs uppercase tracking-[0.2em] sm:inline-flex">
+                        VIEW CV
+                    </a>
+                    <button id="menu-toggle" class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/10 lg:hidden" aria-label="Open menu" aria-expanded="false">
+                        <span class="h-px w-5 bg-white transition-transform duration-300"></span>
+                        <span class="h-px w-5 bg-white transition-transform duration-300"></span>
+                        <span class="h-px w-5 bg-white transition-transform duration-300"></span>
+                    </button>
+                </div>
+            </div>
+
+            {{-- Mobile Menu --}}
+            <div id="mobile-menu" class="hidden border-t border-white/5 bg-ink/95 px-6 py-8 backdrop-blur-md lg:hidden">
+                <nav class="flex flex-col gap-6 font-mono text-sm uppercase tracking-[0.25em]" aria-label="Mobile navigation">
+                    <a href="#home" class="mobile-link text-accent">HOME</a>
+                    <a href="#about" class="mobile-link text-white/60">ABOUT</a>
+                    <a href="#work" class="mobile-link text-white/60">WORK</a>
+                    <a href="#portfolio" class="mobile-link text-white/60">PORTFOLIO</a>
+                    <a href="#experience" class="mobile-link text-white/60">EXPERIENCE</a>
+                    <a href="#services" class="mobile-link text-white/60">SERVICES</a>
+                    <a href="#contact" class="mobile-link text-white/60">CONTACT</a>
+                    <a href="{{ asset('Assets/CV/CV_Rama.pdf') }}" download class="mt-2 inline-flex w-fit border border-accent/60 px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-accent">
+                        VIEW CV
+                    </a>
+                </nav>
+            </div>
+        </header>
+
+        {{-- ================================================================
+        MOBILE MENU OVERLAY
+        ================================================================ --}}
+        <div id="mobile-overlay" class="fixed inset-0 z-30 hidden bg-black/50 lg:hidden"></div>
+
+        <main>
+            {{-- ================================================================
+            HERO — TRIPTYCH LAYERED SYSTEM
+            Z-10: Gradient watermark "PORTFOLIO"
+            Z-20: Portrait cut-out (in front of watermark)
+            Z-30: Left content + Right stats
+            ================================================================ --}}
+            <section id="home" class="relative overflow-hidden pt-28 lg:min-h-screen lg:pt-0">
+                {{-- Lighting: spotlight beam + top indigo wash --}}
+                <div class="spotlight-top pointer-events-none absolute inset-x-0 top-0 z-0 h-[70vh]"></div>
+                <div class="spotlight pointer-events-none absolute inset-0 z-0"></div>
+
+                {{-- Z-10: Giant gradient watermark across upper half --}}
+                <div class="pointer-events-none absolute inset-x-0 top-[18vh] z-10 flex justify-center overflow-hidden lg:top-[22vh]">
+                    <h1 class="select-none whitespace-nowrap font-display text-[21vw] font-black uppercase leading-none tracking-[-0.07em] text-transparent bg-gradient-to-b from-cyan-400 via-indigo-500 to-[#06060F] bg-clip-text lg:text-[18vw]">
+                        PORTFOLIO
+                    </h1>
+                </div>
+
+                {{-- Z-20: Portrait — centered at bottom edge, head overlapping the text --}}
+                <img
+                    src="{{ asset('Assets/Profile/profile_cut.png') }}"
+                    alt="Portrait of Muhammad Ramadhani Pasulleri"
+                    class="photo-mask pointer-events-none absolute -bottom-6 left-1/2 z-20 h-[72vh] w-auto -translate-x-1/2 select-none object-contain object-top lg:-bottom-8 lg:h-[85vh]"
+                >
+
+                {{-- Z-30: Foreground content --}}
+                <div class="relative z-30 mx-auto w-full max-w-[1600px] px-6 pb-16 pt-16 lg:px-12 lg:pb-0 lg:pt-0">
+                    <div class="grid items-end gap-12 lg:min-h-screen lg:grid-cols-2 lg:gap-8 lg:pb-12">
+
+                        {{-- LEFT COLUMN — aligned with left margin --}}
+                        <div class="max-w-xl lg:pb-10">
+                            <p class="font-serif text-2xl italic text-white/80 lg:text-3xl">Hello, I'm</p>
+
+                            <h2 class="mt-5 font-display font-black uppercase leading-[0.9] tracking-tighter text-white text-[clamp(1.75rem,4vw,3.25rem)]">
+                                Muhammad<br>
+                                Ramadhani<br>
+                                <span class="text-accent">Pasulleri</span>
+                            </h2>
+
+                            <p class="mt-7 font-mono text-xs uppercase tracking-[0.25em] text-white/60">
+                                <span id="type-role">WEB DEVELOPER</span><span class="type-cursor"></span>
+                            </p>
+
+                            <p class="mt-7 max-w-md text-sm leading-relaxed text-white/70">
+                                Informatics Engineering student at UIN Maulana Malik Ibrahim Malang — specializing in custom website development and web applications. I build digital products with sharp hierarchy, functional clarity, and one indigo accent that refuses to be ignored.
+                            </p>
+                            <p class="mt-4 max-w-md font-mono text-[11px] uppercase leading-relaxed tracking-[0.15em] text-white/45">
+                                IT Intern @ Garuda Indonesia · GDGOC Core Event Organizer · Batu, East Java — Indonesia
+                            </p>
+
+                            <div class="mt-10 flex flex-wrap items-center gap-4">
+                                <a href="{{ asset('Assets/CV/CV_Rama.pdf') }}" download class="hollow-btn px-8 py-4 font-mono text-xs uppercase tracking-[0.25em]">
+                                    VIEW CV
+                                </a>
+                                <a href="https://www.linkedin.com/in/ramadhani-pasulleri-52922324b/" target="_blank" rel="noopener" class="font-mono text-xs uppercase tracking-[0.25em] text-white/60 transition-colors hover:text-accent">
+                                    LINKEDIN ↗
+                                </a>
+                            </div>
+                        </div>
+
+                        {{-- RIGHT COLUMN — TAGLINE CAPSULE & STACKED VERTICAL METRICS --}}
+                        <div class="ml-auto flex w-full max-w-sm flex-col items-start lg:pb-12">
+                            {{-- 1. WADAH KUTIPAN KAPSUL (TAGLINE BLOCK) --}}
+                            <div class="w-full rounded-2xl border border-white/10 bg-[#121318]/80 px-6 py-4 text-left shadow-xl backdrop-blur-md">
+                                <p class="font-serif text-sm italic leading-relaxed text-gray-300 sm:text-base">
+                                    "Turning ideas into powerful digital experiences."
+                                </p>
+                            </div>
+
+                            {{-- 2 & 3. STATISTIK VERTIKAL (STACKED METRICS) --}}
+                            <div class="mt-10 flex flex-col gap-8 text-left">
+                                {{-- Metrik 1: Years Experience --}}
+                                <div class="flex items-center gap-4 text-left">
+                                    <span class="font-display text-4xl font-black tracking-tight text-white lg:text-5xl">
+                                        1<span class="text-accent">+</span>
+                                    </span>
+                                    <span class="font-mono text-[10px] uppercase leading-tight tracking-widest text-gray-400">
+                                        Years<br>Experience
+                                    </span>
+                                </div>
+
+                                {{-- Metrik 2: Projects Completed --}}
+                                <div class="flex items-center gap-4 text-left">
+                                    <span class="font-display text-4xl font-black tracking-tight text-white lg:text-5xl">
+                                        5<span class="text-accent">+</span>
+                                    </span>
+                                    <span class="font-mono text-[10px] uppercase leading-tight tracking-widest text-gray-400">
+                                        Projects<br>Completed
+                                    </span>
+                                </div>
+
+                                {{-- Metrik 3: Happy Clients --}}
+                                <div class="flex items-center gap-4 text-left">
+                                    <span class="font-display text-4xl font-black tracking-tight text-white lg:text-5xl">
+                                        5<span class="text-accent">+</span>
+                                    </span>
+                                    <span class="font-mono text-[10px] uppercase leading-tight tracking-widest text-gray-400">
+                                        Happy<br>Clients
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {{-- ================================================================
+            ABOUT — 3D ID BADGE + "WHY HIRE ME, NOT AI"
+            ================================================================ --}}
+            <section id="about" class="relative border-t border-white/5 py-24 lg:py-36">
+                <div class="mx-auto max-w-[1600px] px-6 lg:px-12">
+
+                    <div class="grid grid-cols-1 items-start gap-14 lg:grid-cols-12 lg:gap-16">
+
+                        {{-- ============ LEFT: 3D ID BADGE (4 cols) ============ --}}
+                        <div class="reveal lg:col-span-4">
+                            <p class="font-mono text-[11px] uppercase tracking-[0.3em] text-white/40">
+                                Vibe Coder · Web Developer
+                            </p>
+                            <h2 class="mt-4 font-display text-3xl font-black uppercase leading-[0.95] tracking-tighter text-white lg:text-4xl">
+                                Muhammad Ramadhani <span class="text-volt">Pasulleri</span>
+                            </h2>
+
+                            <div class="badge-wrap relative mx-auto mt-12 w-full max-w-[340px]">
+                                {{-- Lanyard ribbon --}}
+                                <div class="relative mx-auto h-28 w-12 overflow-hidden rounded-t-[22px] border border-b-0 border-white/10 bg-[#0B0B16]">
+                                    <div class="lanyard-text absolute inset-0 flex flex-col items-center gap-3 py-3 font-mono text-[10px] font-semibold tracking-[0.35em] text-white/80">
+                                        <span>SIBGAH</span><span>//</span><span>SIBGAH</span><span>//</span><span>SIBGAH</span><span>//</span><span>SIBGAH</span>
+                                    </div>
+                                    <span class="absolute -bottom-px left-0 h-2 w-full bg-[#0B0B16]"></span>
+                                </div>
+
+                                {{-- Badge card --}}
+                                <div class="badge-card relative -mt-1 rounded-[28px] border border-white/10 bg-[#0B0B16] p-5 shadow-[0_40px_90px_-20px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.04)]">
+                                    <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#06060F]">
+                                        <img src="{{ asset('Assets/Profile/avatar.png') }}" alt="Muhammad Ramadhani Pasulleri — real photo" class="aspect-[4/5] w-full object-cover object-top">
+
+                                        {{-- Stacked tech icons — left edge --}}
+                                        <div class="absolute left-3 top-3 flex flex-col gap-2">
+                                            <span class="tech-chip">PY</span>
+                                            <span class="tech-chip">JS</span>
+                                            <span class="tech-chip">TS</span>
+                                            <span class="tech-chip">⚛</span>
+                                        </div>
+
+                                        {{-- Barcode simulation — bottom edge --}}
+                                        <div class="absolute bottom-3 left-3 right-3 flex h-8 items-end gap-[3px] rounded-md bg-white/95 px-2 py-1">
+                                            <span style="width:2px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:1px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:3px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:1px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:2px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:1px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:4px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:1px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:2px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:1px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:3px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:1px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:2px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:2px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:1px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:3px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:1px;height:100%;background:#0B0B16"></span>
+                                            <span style="width:2px;height:100%;background:#0B0B16"></span>
+                                            <span class="ml-auto font-mono text-[9px] font-bold tracking-[0.2em] text-[#0B0B16]">ID·2026</span>
+                                        </div>
+                                    </div>
+
+                                    <p class="mt-4 text-center font-serif text-sm italic leading-relaxed text-white/55">
+                                        “vibe coder · web developer.”
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- ============ RIGHT: COPYWRITING & SKILLS (8 cols) ============ --}}
+                        <div class="reveal lg:col-span-8">
+                            <div class="flex items-center gap-4">
+                                <p class="font-mono text-xs uppercase tracking-[0.3em] text-accent">About Me</p>
+                                <span class="h-px w-16 bg-gradient-to-r from-accent to-transparent"></span>
+                            </div>
+
+                            <h3 class="mt-6 font-display text-[clamp(2.4rem,5.5vw,4.6rem)] font-black uppercase leading-[0.88] tracking-tighter text-white">
+                                Why Hire Me,<br>
+                                <span class="font-serif italic text-blood">The Vibe Coder</span>
+                            </h3>
+
+                            <div class="mt-8 max-w-2xl space-y-5 text-sm leading-relaxed text-white/60 lg:text-base">
+                                <p>
+                                    AI is my co-pilot, not my replacement. I ride the vibe — shipping <strong class="font-semibold text-white">web products</strong> fast with modern tools and AI-assisted workflows — but every build stays anchored to <strong class="font-semibold text-white">business goals</strong>, <strong class="font-semibold text-white">real user needs</strong>, and the human judgment calls that make a product feel right.
+                                </p>
+                                <p>
+                                    Beyond the code, I'm an <strong class="font-semibold text-white">event &amp; community person</strong> and a <strong class="font-semibold text-white">public speaker</strong> — so I don't just build in silence. I communicate the vision, rally the team, and take the stage when it matters. From <strong class="font-semibold text-white">rough idea to shipped product</strong>: I design, build, test, and own the outcome end-to-end.
+                                </p>
+                            </div>
+
+                            <blockquote class="mt-7 border-l-2 border-accent pl-5 font-serif text-lg italic text-white/50 lg:text-xl">
+                                “I don't fight AI — I harness it. Then I ship.”
+                            </blockquote>
+
+                            {{-- Core values & skills --}}
+                            <p class="mt-10 font-mono text-[11px] uppercase tracking-[0.3em] text-white/40">Core Values &amp; Skills</p>
+                            <div class="mt-4 flex flex-wrap gap-3">
+                                @foreach (['Web Development', 'Event Coordination', 'Community Building', 'Public Speaking', 'User-Centered Design', 'Clean Code Implementation', 'Design-to-Code Handoff', 'UX Research', 'Prototyping', 'Systematic Thinking', 'Problem Solving'] as $skill)
+                                    <span class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-white/75 transition-colors hover:border-volt hover:text-volt">{{ $skill }}</span>
+                                @endforeach
+                            </div>
+
+                            {{-- Skewed social matrix --}}
+                            <div class="mt-10 flex gap-3">
+                                <a href="https://www.linkedin.com/in/ramadhani-pasulleri-52922324b/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-block">
+                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>
+                                </a>
+                                <a href="https://www.instagram.com/rlery_/" target="_blank" rel="noopener" aria-label="Instagram" class="social-block">
+                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+                                </a>
+                                <a href="https://www.tiktok.com" target="_blank" rel="noopener" aria-label="TikTok" class="social-block">
+                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.77.12V9.75a5.76 5.76 0 0 0-.77-.05 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.28 1.37V7.3a4.32 4.32 0 0 1-3.22-1.48z"/></svg>
+                                </a>
+                                <a href="mailto:ramadhanipasulleri123@gmail.com" aria-label="Email" class="social-block">
+                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                                </a>
+                                <a href="https://wa.me/62895342586921" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-block">
+                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.84 9.84 0 0 0 12.04 2zm5.82 14.13c-.24.68-1.4 1.3-1.94 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.91-1.25-4.81-4.18-4.95-4.37-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.58-.36.78-.36l.56.01c.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.09.19-.14.31-.28.48l-.42.5c-.14.14-.28.29-.12.56.16.27.72 1.19 1.55 1.93 1.07.95 1.97 1.25 2.25 1.39.28.14.44.12.6-.07.17-.19.7-.81.88-1.09.19-.28.37-.23.62-.14.25.09 1.6.75 1.87.89.27.14.45.21.52.32.07.12.07.66-.17 1.35z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- ============ BOTTOM: MINI CERTIFICATIONS FOOTER ============ --}}
+                    <div class="reveal mt-20 lg:mt-24">
+                        <div class="flex items-center gap-4">
+                            <p class="shrink-0 font-mono text-[11px] uppercase tracking-[0.3em] text-accent">Certifications</p>
+                            <span class="h-px flex-1 bg-gradient-to-r from-accent/40 via-white/10 to-transparent"></span>
+                        </div>
+                        <div class="cert-stream scrollbar-none mt-6 flex gap-4 overflow-x-auto pb-4">
+                            <div class="cert-thumb shrink-0">
+                                <img src="{{ asset('Assets/Certifications/cert-garuda-internship.png') }}" alt="Garuda Indonesia Internship Certificate" data-lightbox-src="{{ asset('Assets/Certifications/cert-garuda-internship.png') }}" data-lightbox-caption="Garuda Indonesia — Sertifikat Program Magang" class="case-zoom h-full w-full object-cover" loading="lazy">
+                            </div>
+                            <div class="cert-thumb shrink-0">
+                                <img src="{{ asset('Assets/Certifications/cert-public-speaking-mcf.png') }}" alt="Public Speaking Certificate — Malang Creativepreneur Festival" data-lightbox-src="{{ asset('Assets/Certifications/cert-public-speaking-mcf.png') }}" data-lightbox-caption="Malang Creativepreneur Festival — Public Speaking" class="case-zoom h-full w-full object-cover" loading="lazy">
+                            </div>
+                            <div class="cert-thumb shrink-0">
+                                <img src="{{ asset('Assets/Certifications/cert-kewirausahaan-jatim.png') }}" alt="Kewirausahaan Pemuda Peternak Milenial Certificate" data-lightbox-src="{{ asset('Assets/Certifications/cert-kewirausahaan-jatim.png') }}" data-lightbox-caption="Dispora Jatim — Kewirausahaan Pemuda Peternak Milenial" class="case-zoom h-full w-full object-cover" loading="lazy">
+                            </div>
+                            <div class="cert-thumb shrink-0">
+                                <img src="{{ asset('Assets/Certifications/certificate-ai-career-readiness.png') }}" alt="AI Career Readiness certificate" data-lightbox-src="{{ asset('Assets/Certifications/certificate-ai-career-readiness.png') }}" data-lightbox-caption="AI Career Readiness — Certificate of Completion" class="case-zoom h-full w-full object-cover" loading="lazy">
+                            </div>
+                            <div class="flex shrink-0 items-center justify-center border border-dashed border-white/15 px-8 text-center">
+                                <p class="max-w-[180px] font-mono text-[10px] uppercase leading-relaxed tracking-[0.2em] text-white/35">More credentials<br>available on request</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {{-- ================================================================
+            WORK & EXPERIENCE — CRIMSON ENERGY TIMELINE
+            ================================================================ --}}
+            <section id="work" class="relative border-t border-white/5 py-24 lg:py-36">
+                <div class="mx-auto max-w-[1600px] px-6 lg:px-12">
+                    <div class="reveal mb-16 flex flex-col gap-6 lg:mb-24 lg:flex-row lg:items-end lg:justify-between">
+                        <div>
+                            <p class="font-mono text-xs uppercase tracking-[0.3em] text-accent">02 / WORK</p>
+                            <h2 class="mt-6 font-display font-black uppercase leading-[0.85] tracking-tighter text-[clamp(3.2rem,8vw,8rem)]">
+                                WORK &amp;<br><span class="text-blood/80">EXPERIENCE</span>
+                            </h2>
+                        </div>
+                        <p class="max-w-xs text-sm leading-relaxed text-white/45">
+                            From IT operations at Garuda Indonesia to community leadership — every role mapped on one indigo line.
+                        </p>
+                    </div>
+
+                    <div id="experience" class="reveal relative max-w-4xl">
+                        <div class="absolute left-[5px] top-0 h-full w-px bg-gradient-to-b from-accent/40 via-accent/25 to-transparent"></div>
+
+                        <article class="relative pb-16 pl-12">
+                            <span class="absolute left-0 top-1.5 h-[11px] w-[11px] -translate-x-[3px] rounded-full bg-accent shadow-[0_0_0_4px_rgba(225,29,72,0.15),0_0_22px_rgba(225,29,72,0.5)]"></span>
+                            <p class="font-mono text-xs tracking-[0.25em] text-accent">2025</p>
+                            <h3 class="mt-3 font-display text-2xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">IT Intern</h3>
+                            <p class="mt-2 font-mono text-xs uppercase tracking-[0.15em] text-white/60">GARUDA INDONESIA — DENPASAR BRANCH</p>
+                            <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/45">
+                                Analyzed, engineered, and deployed an integrated web-based digital queuing system to streamline airport passenger service workflows. Implemented an internal goods &amp; logistics tracking platform while managing hardware, server infrastructure, and network operational reliability.
+                            </p>
+                            <div class="timeline-gallery mt-5 flex flex-wrap gap-2.5">
+                                @php
+                                    $garudaDocs = [
+                                        ['doc-1.jpg', 'Garuda Indonesia — Fasilitas & Suasana Kerja'],
+                                        ['doc-2.jpg', 'Garuda Indonesia — Tim IT & Penugasan Lapangan'],
+                                        ['doc-3.jpg', 'Garuda Indonesia — Operasional Bandara & Layanan'],
+                                        ['doc-4.jpg', 'Garuda Indonesia — Aktivitas & Sistem Antrian'],
+                                    ];
+                                @endphp
+                                @foreach ($garudaDocs as $gDoc)
+                                    <div class="group/thumb relative h-16 w-24 overflow-hidden border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-volt hover:scale-105 sm:h-20 sm:w-28">
+                                        <img src="{{ asset('Assets/Experience/garuda/' . $gDoc[0]) }}"
+                                             alt="{{ $gDoc[1] }}"
+                                             data-lightbox-src="{{ asset('Assets/Experience/garuda/' . $gDoc[0]) }}"
+                                             data-lightbox-caption="{{ $gDoc[1] }}"
+                                             class="case-zoom h-full w-full object-cover transition-transform duration-500 group-hover/thumb:scale-110"
+                                             loading="lazy">
+                                        <span class="pointer-events-none absolute bottom-1 right-1 bg-black/75 px-1 py-0.5 font-mono text-[8px] uppercase tracking-wider text-white/70 backdrop-blur-xs">DOC</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </article>
+
+                        <article class="relative pb-16 pl-12">
+                            <span class="absolute left-0 top-1.5 h-[11px] w-[11px] -translate-x-[3px] rounded-full border border-accent bg-ink"></span>
+                            <p class="font-mono text-xs tracking-[0.25em] text-white/40">2025 — 2026</p>
+                            <h3 class="mt-3 font-display text-2xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">Manager Resto &amp; Finance</h3>
+                            <p class="mt-2 font-mono text-xs uppercase tracking-[0.15em] text-white/60">LADY ELISABETH RESTO</p>
+                            <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/45">
+                                Directed the end-to-end operational software cycle of Point-of-Sale (POS) cashier systems. Automated cash flow tracking, dynamically budgeted raw material purchasing, and compiled full-stack monthly financial reports.
+                            </p>
+                            <div class="timeline-gallery mt-5 flex flex-wrap gap-2.5">
+                                @php
+                                    $restoDocs = [
+                                        ['doc-1.jpg', 'Lady Elisabeth Resto — Manajemen Resto & Kasir'],
+                                        ['doc-2.jpg', 'Lady Elisabeth Resto — Operasional Tim & Dining Area'],
+                                        ['doc-3.jpg', 'Lady Elisabeth Resto — Dokumentasi Tambahan Operasional'],
+                                    ];
+                                @endphp
+                                @foreach ($restoDocs as $rDoc)
+                                    <div class="group/thumb relative h-16 w-24 overflow-hidden border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-volt hover:scale-105 sm:h-20 sm:w-28">
+                                        <img src="{{ asset('Assets/Experience/lady-elisabeth/' . $rDoc[0]) }}"
+                                             alt="{{ $rDoc[1] }}"
+                                             data-lightbox-src="{{ asset('Assets/Experience/lady-elisabeth/' . $rDoc[0]) }}"
+                                             data-lightbox-caption="{{ $rDoc[1] }}"
+                                             class="case-zoom h-full w-full object-cover transition-transform duration-500 group-hover/thumb:scale-110"
+                                             loading="lazy">
+                                        <span class="pointer-events-none absolute bottom-1 right-1 bg-black/75 px-1 py-0.5 font-mono text-[8px] uppercase tracking-wider text-white/70 backdrop-blur-xs">DOC</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </article>
+
+                        <article class="relative pb-16 pl-12">
+                            <span class="absolute left-0 top-1.5 h-[11px] w-[11px] -translate-x-[3px] rounded-full border border-accent bg-ink"></span>
+                            <p class="font-mono text-xs tracking-[0.25em] text-white/40">2023 — 2025</p>
+                            <h3 class="mt-3 font-display text-2xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">Core Event Organizer</h3>
+                            <p class="mt-2 font-mono text-xs uppercase tracking-[0.15em] text-white/60">GDGOC — GOOGLE DEVELOPER GROUP ON CAMPUS</p>
+                            <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/45">
+                                Structured, planned, and executed technical event roadmaps for GDGoC 2024 (TechTalk, Info Sessions, and Study Jam: Web &amp; UI/UX). Served as technical moderator and lead logistics coordinator for community developer bootcamps.
+                            </p>
+                            <div class="timeline-gallery mt-5 flex flex-wrap gap-2.5">
+                                @php
+                                    $gdgDocs = [
+                                        ['doc-1.jpg', 'GDGOC — Google Developer Groups Event Documentation'],
+                                        ['doc-2.jpg', 'GDGOC — Community TechTalk & Workshop Session'],
+                                    ];
+                                @endphp
+                                @foreach ($gdgDocs as $gdDoc)
+                                    <div class="group/thumb relative h-16 w-24 overflow-hidden border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-volt hover:scale-105 sm:h-20 sm:w-28">
+                                        <img src="{{ asset('Assets/Experience/gdgoc/' . $gdDoc[0]) }}"
+                                             alt="{{ $gdDoc[1] }}"
+                                             data-lightbox-src="{{ asset('Assets/Experience/gdgoc/' . $gdDoc[0]) }}"
+                                             data-lightbox-caption="{{ $gdDoc[1] }}"
+                                             class="case-zoom h-full w-full object-cover transition-transform duration-500 group-hover/thumb:scale-110"
+                                             loading="lazy">
+                                        <span class="pointer-events-none absolute bottom-1 right-1 bg-black/75 px-1 py-0.5 font-mono text-[8px] uppercase tracking-wider text-white/70 backdrop-blur-xs">DOC</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </article>
+
+                        <article class="relative pl-12">
+                            <span class="absolute left-0 top-1.5 h-[11px] w-[11px] -translate-x-[3px] rounded-full border border-accent bg-ink"></span>
+                            <p class="font-mono text-xs tracking-[0.25em] text-white/40">2021 — 2026</p>
+                            <h3 class="mt-3 font-display text-2xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">IT Support &amp; Admin</h3>
+                            <p class="mt-2 font-mono text-xs uppercase tracking-[0.15em] text-white/60">PONPES SALAFIYAH ROUDLOTUR RIDLWAN</p>
+                            <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/45">
+                                Managed large-scale relational databases for institutional records, deployed digital administrative portals for daily operations, and ensured compliance for financial reporting and institutional taxation.
+                            </p>
+                            <div class="timeline-gallery mt-5 flex flex-wrap gap-2.5">
+                                @php
+                                    $ponpesDocs = [
+                                        ['doc-1.jpg', 'Ponpes Salafiyah — Administrasi & Pendataan'],
+                                        ['doc-2.jpg', 'Ponpes Salafiyah — Kegiatan Operasional Yayasan'],
+                                        ['doc-3.jpg', 'Ponpes Salafiyah — Pengelolaan Sistem IT & Laporan'],
+                                    ];
+                                @endphp
+                                @foreach ($ponpesDocs as $pDoc)
+                                    <div class="group/thumb relative h-16 w-24 overflow-hidden border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-volt hover:scale-105 sm:h-20 sm:w-28">
+                                        <img src="{{ asset('Assets/Experience/ponpes-salafiyah/' . $pDoc[0]) }}"
+                                             alt="{{ $pDoc[1] }}"
+                                             data-lightbox-src="{{ asset('Assets/Experience/ponpes-salafiyah/' . $pDoc[0]) }}"
+                                             data-lightbox-caption="{{ $pDoc[1] }}"
+                                             class="case-zoom h-full w-full object-cover transition-transform duration-500 group-hover/thumb:scale-110"
+                                             loading="lazy">
+                                        <span class="pointer-events-none absolute bottom-1 right-1 bg-black/75 px-1 py-0.5 font-mono text-[8px] uppercase tracking-wider text-white/70 backdrop-blur-xs">DOC</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+
+            {{-- ================================================================
+            PORTFOLIO — HORIZONTAL SLIDER (ALL PROJECTS)
+            ================================================================ --}}
+            <section id="portfolio" class="relative border-t border-white/5 py-24 lg:py-36">
+                <div class="mx-auto max-w-[1600px] px-6 lg:px-12">
+                    <div class="reveal mb-16 flex flex-col gap-6 lg:mb-20 lg:flex-row lg:items-end lg:justify-between">
+                        <div>
+                            <p class="font-mono text-xs uppercase tracking-[0.3em] text-accent">03 / PORTFOLIO</p>
+                            <h2 class="mt-6 font-display font-black uppercase leading-[0.85] tracking-tighter text-[clamp(3.2rem,8vw,8rem)]">
+                                SELECTED<br><span class="text-blood/80">PROJECTS</span>
+                            </h2>
+                        </div>
+                        <p class="max-w-xs text-sm leading-relaxed text-white/45">
+                            Eleven production-grade systems — POS, finance, queuing, booking, travel, e-commerce &amp; more — captured case-study-grade with realistic data.
+                        </p>
+                    </div>
+
+                    @php
+                        $projects = [
+                            [
+                                'slug' => 'sistem-kasir-resto',
+                                'name' => 'Sistem Kasir Resto',
+                                'category' => 'POS · WEB APP',
+                                'tier' => 'Enterprise Application',
+                                'tags' => ['Laravel', 'MySQL', 'Tailwind', 'Midtrans'],
+                                'gradient' => 'from-accent/20 via-transparent to-blood/20',
+                                'screens' => 6,
+                                'overview' => 'A unified restaurant point-of-sale and back-office system that turns fragmented order taking, kitchen printing and daily settlement into one real-time cashier workspace.',
+                                'challenge' => 'The restaurant ran daily operations across three disconnected tools — a manual order book, a spreadsheet for revenue, and paper shift notes. Closing the day meant reconciling mismatched totals by hand.',
+                                'problem' => [
+                                    'Orders were written by hand, then re-typed into a cash drawer app.',
+                                    'Shift handovers had no cash-in / cash-out accountability.',
+                                    'Revenue reports were compiled hours after closing time.',
+                                    'Menu changes were not reflected on the cashier terminal.',
+                                ],
+                                'solution' => [
+                                    'Unified POS Interface — streams order entry, table mapping and payment settlement in one view.',
+                                    'Real-time Dashboard — computes sales, cash, QRIS and PPN 11% from live transaction data.',
+                                    'Shift Management — logs opened_at, closed_at, opening and closing cash per user session.',
+                                    'Printable Kitchen & Receipt flows — order details rendered for thermal printers without extra hardware.',
+                                ],
+                                'journey' => [
+                                    'Reverse-engineered the existing manual workflow before writing a single route.',
+                                    'Modeled orders, payments and shifts so every revenue status maps to a single source of truth.',
+                                    'Seeded 8 real transactions with matching payment records so dashboards stay honest.',
+                                    'Validated the close-of-day flow: sales Rp 265.290 equals settled payments, cash and non-cash combined.',
+                                ],
+                                'outcomes' => [
+                                    '100% order-to-payment traceability at close of day',
+                                    'Shift accountability with opening/closing cash audits',
+                                    'Live PPN 11% reporting without spreadsheet work',
+                                    'One screen replaces three manual operational tools',
+                                ],
+                            ],
+                            [
+                                'slug' => 'sistem-kasir-toko',
+                                'name' => 'Sistem Kasir Toko',
+                                'category' => 'POS · WEB APP',
+                                'tier' => 'Enterprise Application',
+                                'tags' => ['Laravel', 'MySQL', 'Blade', 'Demo Mode'],
+                                'gradient' => 'from-blood/25 via-transparent to-accent/10',
+                                'screens' => 6,
+                                'overview' => 'A retail point-of-sale and inventory control panel for small-to-mid shops, with a one-click demo mode so new operators can explore the system safely before real data exists.',
+                                'challenge' => 'Shop owners needed a POS that works from day one — but a blank system scares new users away. The product also had to cover product management, transaction history and settings in one place.',
+                                'problem' => [
+                                    'New users had no guided way to explore the system.',
+                                    'Product, order and settings modules lived in separate mental models.',
+                                    'No single transaction entry flow for fast checkout.',
+                                    'First-run setup required too many manual steps.',
+                                ],
+                                'solution' => [
+                                    'One-Click Demo Login — seeds a full working session via /coba-demo.',
+                                    'Transaction Entry flow — product picker, quantity, payment and receipt in one screen.',
+                                    'Product & Category management — CRUD panels with stock and pricing.',
+                                    'System Settings — device, profile and shop identity configuration.',
+                                ],
+                                'journey' => [
+                                    'Fixed a Blade compiler crash caused by JSON-LD @context being parsed as a directive.',
+                                    'Built the demo seeder so every module opens with meaningful sample records.',
+                                    'Mapped all public routes to confirm landing, login and setup flows return 200.',
+                                    'Captured the full flow: landing, demo dashboard, POS entry, products, reports and mobile.',
+                                ],
+                                'outcomes' => [
+                                    'New users reach a working dashboard in one click',
+                                    'Full transaction lifecycle: entry to history to report',
+                                    'Zero-config first-run with guided setup',
+                                    'Retail operators onboard without documentation',
+                                ],
+                            ],
+                            [
+                                'slug' => 'sistem-keuangan-tk2',
+                                'name' => 'Sistem Keuangan TK',
+                                'category' => 'FINANCE · WEB APP',
+                                'tier' => 'Enterprise Application',
+                                'tags' => ['Laravel', 'MySQL', 'Billing', 'Reporting'],
+                                'gradient' => 'from-white/5 via-transparent to-blood/20',
+                                'screens' => 6,
+                                'overview' => 'A kindergarten finance administration panel managing student billing, payment verification, and operational reporting in a single accountable ledger.',
+                                'challenge' => 'The school tracked tuition on spreadsheets split across admins. Verifying who already paid, who was late, and how much was collected each month consumed days of staff time.',
+                                'problem' => [
+                                    'Student billing and payment statuses lived in disconnected files.',
+                                    'Payment verification needed a manual confirmation step.',
+                                    'Monthly summaries were error-prone and slow to produce.',
+                                    'No audit trail of who verified which payment.',
+                                ],
+                                'solution' => [
+                                    'Student Billing module — generates per-student invoices with due dates.',
+                                    'Payment Verification flow — admins confirm and stamp each incoming payment.',
+                                    'Financial Dashboard — collection totals, outstanding balances and recent activity.',
+                                    'Operational Reports — exportable summaries per class and period.',
+                                ],
+                                'journey' => [
+                                    'Modeled students, invoices and payments with proper relationships.',
+                                    'Seeded 30 students, 159 invoices and 93 verified payments for realistic reporting.',
+                                    'Built the verification flow with an audit-friendly state machine.',
+                                    'Captured dashboard, billing, verification, reports and mobile states.',
+                                ],
+                                'outcomes' => [
+                                    '159 invoices tracked across 30 students',
+                                    '93 verified payments with a clean audit trail',
+                                    'Monthly collection visible at a glance',
+                                    'Spreadsheet reconciliation eliminated',
+                                ],
+                            ],
+                            [
+                                'slug' => 'Web-garuda-demo',
+                                'name' => 'Garuda Indonesia Booking',
+                                'category' => 'WEB SOLUTION',
+                                'tier' => 'Web Solution',
+                                'tags' => ['PHP', 'MySQL', 'Booking', 'Admin Panel'],
+                                'gradient' => 'from-blood/25 via-transparent to-accent/10',
+                                'screens' => 6,
+                                'overview' => 'A travel booking portal with a customer-facing reservation flow and an admin back office for managing bookings, tickets, hotels and payments.',
+                                'challenge' => 'Bookings arrived through an unstructured channel, and the admin team had no single view of reservations, payments and customer details — leading to double bookings and slow confirmations.',
+                                'problem' => [
+                                    'Reservation records were not linked to payments.',
+                                    'Customer identity was missing from booking entries.',
+                                    'Admin had no unified operational dashboard.',
+                                    'Payment status and booking status could drift apart.',
+                                ],
+                                'solution' => [
+                                    'Booking Pipeline — reservations flow from created to confirmed to completed.',
+                                    'Payment Reconciliation — each booking links to its payment record.',
+                                    'Customer Profiles — bookings carry real customer names and contact data.',
+                                    'Admin Operations — tickets, hotels and user management panels.',
+                                ],
+                                'journey' => [
+                                    'Imported the existing garuda_indonesia_website schema into the local environment.',
+                                    'Normalized bookings so every confirmed reservation has a matching payment.',
+                                    'Added varied customer identities instead of a single admin placeholder.',
+                                    'Captured the admin dashboard, booking table, payment and user panels.',
+                                ],
+                                'outcomes' => [
+                                    'Booking and payment states stay in sync',
+                                    'Customer identity visible on every reservation',
+                                    'One admin panel replaces scattered tracking',
+                                    'Operational reporting built on clean relationships',
+                                ],
+                            ],
+                            [
+                                'slug' => 'Antrian-Garuda',
+                                'name' => 'Antrian Garuda',
+                                'category' => 'QUEUE · WEB APP',
+                                'tier' => 'Web Solution',
+                                'tags' => ['Laravel', 'SQLite', 'Queue', 'Live Display'],
+                                'gradient' => 'from-accent/10 via-transparent to-white/5',
+                                'screens' => 5,
+                                'overview' => 'A queue management system for service counters — issue a ticket, track waiting, serving and finished states, and drive a live display for the waiting room.',
+                                'challenge' => 'The service center had no fair, visible queue system. Visitors crowded counters, staff lost track of who was next, and no one could see waiting times.',
+                                'problem' => [
+                                    'No ticket issuance for walk-in visitors.',
+                                    'Counter staff had no shared queue state.',
+                                    'Waiting visitors could not see their position.',
+                                    'Daily service totals were unknown.',
+                                ],
+                                'solution' => [
+                                    'Ticket Issuance — generates numbered queue entries per service date.',
+                                    'Live Counter Display — a waiting-room view driven by the same data.',
+                                    'Queue State Machine — menunggu, dilayani, selesai and dilewati.',
+                                    'Service Dashboard — totals and category breakdowns that always reconcile.',
+                                ],
+                                'journey' => [
+                                    'Repaired the project setup: composer install, SQLite migration and Vite build.',
+                                    'Fixed a duplicate index in the queue migrations so the schema could install cleanly.',
+                                    'Seeded 15 same-day queues across realistic statuses.',
+                                    'Captured the display, dashboard, queue history and mobile breakpoint.',
+                                ],
+                                'outcomes' => [
+                                    '15 queues tracked with consistent totals',
+                                    'Fair first-in, first-out service flow',
+                                    'Waiting room display driven by live state',
+                                    'End-of-day service totals reconcile automatically',
+                                ],
+                            ],
+                            [
+                                'slug' => 'analisa-saham',
+                                'name' => 'Analisa Saham',
+                                'category' => 'FINTECH · WEB APP',
+                                'tier' => 'Web Solution',
+                                'tags' => ['Laravel', 'SQLite', 'Trading', 'Charting'],
+                                'gradient' => 'from-accent/20 via-transparent to-white/5',
+                                'screens' => 4,
+                                'overview' => 'A stock trading setup scanner that tracks OPEN, WIN and LOSS positions with live price feeds, entry/exit planning and historical performance charts.',
+                                'challenge' => 'Traders managed setups across scattered spreadsheets and chat groups. There was no single place to see active positions, live progress toward take-profit, and historical win/loss data.',
+                                'problem' => [
+                                    'Active trading setups were scattered across files.',
+                                    'No live progress tracking from entry toward take-profit.',
+                                    'Historical win/loss records were hard to review.',
+                                    'Chart analysis required switching between tools.',
+                                ],
+                                'solution' => [
+                                    'Trading Dashboard — aggregates active setups and historical performance.',
+                                    'Live Price Tracker — shows progress between stop-loss and take-profit.',
+                                    'Setup Scanner — analyzes symbols and stores structured setups.',
+                                    'Chart Views — per-setup charting with multiple timeframes.',
+                                ],
+                                'journey' => [
+                                    'Modeled setups, price ticks and trading accounts in a clean relational schema.',
+                                    'Seeded 28 realistic setups across OPEN, WIN and LOSS statuses.',
+                                    'Built the dashboard to fetch active and historical setups concurrently.',
+                                    'Captured dashboard, analysis, results and settings views.',
+                                ],
+                                'outcomes' => [
+                                    '28 setups tracked across statuses',
+                                    'Live progress from entry to target',
+                                    'Win/loss history at a glance',
+                                    'One workspace replaces scattered spreadsheets',
+                                ],
+                            ],
+                            [
+                                'slug' => 'bali-travel',
+                                'name' => 'Bali Travel',
+                                'category' => 'TRAVEL · WEB APP',
+                                'tier' => 'Web Solution',
+                                'tags' => ['Laravel', 'SQLite', 'Booking', 'Tour'],
+                                'gradient' => 'from-blood/20 via-transparent to-accent/10',
+                                'screens' => 5,
+                                'overview' => 'A Bali travel booking platform with curated trip packages, instant booking flows, and custom trip planning for travelers exploring the island.',
+                                'challenge' => 'Travelers had to jump between multiple sites to compare trips, book packages, and plan custom itineraries. The booking flow was fragmented and unclear.',
+                                'problem' => [
+                                    'Trip packages were hard to browse and compare.',
+                                    'Instant booking flow was not streamlined.',
+                                    'Custom trip requests had no dedicated path.',
+                                    'Mobile travelers struggled with the old layout.',
+                                ],
+                                'solution' => [
+                                    'Trip Catalog — curated packages with full details.',
+                                    'Instant Booking — streamlined reservation flow.',
+                                    'Custom Trip Builder — travelers describe their dream itinerary.',
+                                    'Responsive Layout — optimized for phone and tablet.',
+                                ],
+                                'journey' => [
+                                    'Mapped all public routes for trips, booking and custom requests.',
+                                    'Built a consistent card-based trip catalog.',
+                                    'Verified desktop and mobile renders across all pages.',
+                                    'Captured landing, trips, booking, packages and custom trip views.',
+                                ],
+                                'outcomes' => [
+                                    'Full trip discovery in one scroll',
+                                    'Streamlined instant booking flow',
+                                    'Dedicated custom trip path',
+                                    'Mobile-first across all breakpoints',
+                                ],
+                            ],
+                            [
+                                'slug' => 'kazami-store',
+                                'name' => 'Kazami Store',
+                                'category' => 'E-COMMERCE · WEB APP',
+                                'tier' => 'Web Solution',
+                                'tags' => ['Laravel', 'SQLite', 'Catalog', 'Pre-Order'],
+                                'gradient' => 'from-white/5 via-transparent to-blood/20',
+                                'screens' => 5,
+                                'overview' => 'A product landing and catalog experience for a collectibles store with a pre-order guide and series-based browsing.',
+                                'challenge' => 'The store needed a clean digital storefront that presents its product series, colors and pre-order process without overwhelming new visitors.',
+                                'problem' => [
+                                    'No clear catalog for browsing product series.',
+                                    'Pre-order process was not explained.',
+                                    'Series and color variants were hard to navigate.',
+                                ],
+                                'solution' => [
+                                    'Hero Storefront — brand-first landing with strong visuals.',
+                                    'Catalog View — browse series and color variants.',
+                                    'Pre-Order Guide — step-by-step instructions.',
+                                ],
+                                'journey' => [
+                                    'Mapped the series and color route structure.',
+                                    'Built the catalog to surface variants cleanly.',
+                                    'Captured landing, catalog and pre-order guide.',
+                                ],
+                                'outcomes' => [
+                                    'Brand-present storefront in one viewport',
+                                    'Clear series and color browsing',
+                                    'Self-serve pre-order instructions',
+                                ],
+                            ],
+                            [
+                                'slug' => 'web-pondok',
+                                'name' => 'Web Pondok',
+                                'category' => 'EDUCATION · WEB APP',
+                                'tier' => 'Web Solution',
+                                'tags' => ['Laravel', 'SQLite', 'PPDB', 'Articles'],
+                                'gradient' => 'from-accent/10 via-transparent to-white/5',
+                                'screens' => 5,
+                                'overview' => 'An Islamic boarding school (pondok pesantren) web platform with article publishing, new student admission (PPDB) and an admin panel.',
+                                'challenge' => 'The school needed a digital presence that serves three audiences: readers looking for articles, parents registering new students, and admins managing both.',
+                                'problem' => [
+                                    'No central place for school articles.',
+                                    'New student registration was paper-based.',
+                                    'Admin management was manual and fragmented.',
+                                ],
+                                'solution' => [
+                                    'Article System — publish and browse school articles.',
+                                    'PPDB Portal — online registration with status tracking.',
+                                    'Admin Panel — manage users, articles and registrants.',
+                                ],
+                                'journey' => [
+                                    'Modeled articles, users and PPDB registrants.',
+                                    'Built the public article and registration flows.',
+                                    'Captured landing, article, PPDB and login views.',
+                                ],
+                                'outcomes' => [
+                                    'Articles published and browsable online',
+                                    'Online student registration flow',
+                                    'Central admin management panel',
+                                ],
+                            ],
+                        ];
+                    @endphp
+
+                    {{-- Horizontal slider container --}}
+                    <div id="project-slider" class="scrollbar-none -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-10 lg:-mx-12 lg:px-12">
+                        @foreach ($projects as $i => $p)
+                            <article
+                                data-case-open="{{ $i }}"
+                                role="button"
+                                tabindex="0"
+                                aria-label="Open case study: {{ $p['name'] }}"
+                                class="group w-[82vw] shrink-0 cursor-pointer snap-start sm:w-[420px] lg:w-[440px]"
+                            >
+                                <div class="flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] transition-all duration-500 group-hover:-translate-y-2 group-hover:border-volt/40 group-hover:shadow-[0_30px_80px_rgba(99,102,241,0.25)]">
+                                    {{-- Visual mockup area --}}
+                                    <div class="relative h-60 shrink-0 overflow-hidden border-b border-white/10 bg-white">
+                                        <img
+                                            src="{{ asset('Assets/Profile/' . $p['slug'] . '/hero-mockup.png') }}"
+                                            alt="{{ $p['name'] }} — main dashboard"
+                                            loading="lazy"
+                                            class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                        >
+                                        <span class="absolute left-5 top-5 rounded-full bg-black/70 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-white/80 backdrop-blur">
+                                            {{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }} / {{ count($projects) }}
+                                        </span>
+                                        <span class="absolute bottom-4 right-5 rounded-full bg-volt px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-black">
+                                            {{ $p['tier'] }}
+                                        </span>
+                                    </div>
+
+                                    {{-- Content area --}}
+                                    <div class="flex flex-1 flex-col p-6 lg:p-8">
+                                        <h3 class="font-display text-2xl font-black uppercase tracking-tight text-white">{{ $p['name'] }}</h3>
+                                        <p class="mt-1 font-mono text-xs uppercase tracking-[0.15em] text-white/40">{{ $p['category'] }}</p>
+
+                                        {{-- Tech stack capsules --}}
+                                        <div class="mt-4 flex flex-wrap gap-2">
+                                            @foreach (array_slice($p['tags'], 0, 3) as $tag)
+                                                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-white/70">{{ $tag }}</span>
+                                            @endforeach
+                                            @if (count($p['tags']) > 3)
+                                                <span class="rounded-full border border-volt/30 bg-volt/10 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-volt">+{{ count($p['tags']) - 3 }}</span>
+                                            @endif
+                                        </div>
+
+                                        <p class="mt-4 line-clamp-3 text-sm leading-relaxed text-white/45">{{ $p['overview'] }}</p>
+
+                                        <span
+                                            class="mt-auto pt-6 font-mono text-sm font-bold tracking-wide text-white/40 transition-colors duration-300 group-hover:text-white"
+                                        >
+                                            View Details →
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+
+                    {{-- Track controller & navigation --}}
+                    <div class="mt-6 flex items-center justify-between gap-8">
+                        <div class="relative h-px flex-1 bg-white/15">
+                            <div id="slider-progress" class="absolute left-0 top-1/2 h-[3px] w-16 -translate-y-1/2 rounded-full bg-volt transition-[left] duration-200 ease-out" style="left:0%;"></div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button type="button" id="slider-prev" class="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-lg text-white/70 transition-all duration-300 hover:border-volt hover:text-volt" aria-label="Previous projects">←</button>
+                            <button type="button" id="slider-next" class="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-lg text-white/70 transition-all duration-300 hover:border-volt hover:text-volt" aria-label="Next projects">→</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {{-- ================================================================
+            CASE STUDY VIEW — DYNAMIC PROJECT DETAIL (OVERLAY)
+            ================================================================ --}}
+            <div id="case-study" class="invisible fixed inset-0 z-[80] bg-case text-white opacity-0 transition-all duration-500" role="dialog" aria-modal="true" aria-label="Project case study">
+                <div id="case-scroll" class="h-full overflow-y-auto overscroll-contain">
+                    {{-- Sticky control bar --}}
+                    <div class="sticky top-0 z-20 border-b border-white/10 bg-case/90 backdrop-blur-md">
+                        <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+                            <button type="button" data-case-close class="group inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-white/60 transition-colors duration-300 hover:text-volt" aria-label="Close case study and back to projects">
+                                <span class="text-base leading-none transition-transform duration-300 group-hover:-translate-x-1">←</span>
+                                <span class="hidden sm:inline">Close Case Study</span>
+                                <span class="sm:hidden">Back</span>
+                            </button>
+                            <span id="case-meta" class="font-mono text-xs uppercase tracking-[0.25em] text-white/40">01 / 06</span>
+                        </div>
+                    </div>
+
+                    @foreach ($projects as $i => $p)
+                        @php
+                            $files = ['hero-mockup.png'];
+                            for ($s = 1; $s <= $p['screens']; $s++) { $files[] = 'screen-' . $s . '.png'; }
+                            $count = count($files);
+                            if ($count >= 5) {
+                                $showcase = [$files[1], $files[2], $files[0], $files[3], $files[4]];
+                                $showcaseCount = 5;
+                            } elseif ($count === 4) {
+                                $showcase = [$files[1], $files[0], $files[2], $files[3]];
+                                $showcaseCount = 4;
+                            } elseif ($count === 3) {
+                                $showcase = [$files[1], $files[0], $files[2]];
+                                $showcaseCount = 3;
+                            } elseif ($count === 2) {
+                                $showcase = [$files[0], $files[1]];
+                                $showcaseCount = 2;
+                            } else {
+                                $showcase = [$files[0]];
+                                $showcaseCount = 1;
+                            }
+                            $featuredPos = array_search($files[0], $showcase, true);
+                        @endphp
+                        <div class="case-panel" data-case-panel="{{ $i }}" hidden>
+                            <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 lg:grid-cols-12 lg:py-20">
+
+                                {{-- LEFT: FIXED TIMELINE SUB-MENU --}}
+                                <aside class="hidden lg:col-span-3 lg:block">
+                                    <div class="lg:sticky lg:top-32 lg:self-start">
+                                        <p class="mb-6 font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">Case Index</p>
+                                        <nav class="case-nav space-y-4 font-mono text-sm" aria-label="Case study sections">
+                                            <a href="#" data-case-goto="cs-overview-{{ $i }}" data-case-spy="cs-overview-{{ $i }}" class="case-nav-link block tracking-widest">01 Overview</a>
+                                            <a href="#" data-case-goto="cs-challenge-{{ $i }}" data-case-spy="cs-challenge-{{ $i }}" class="case-nav-link block tracking-widest">02 The Challenge</a>
+                                            <a href="#" data-case-goto="cs-problem-{{ $i }}" data-case-spy="cs-problem-{{ $i }}" class="case-nav-link block tracking-widest">03 Problem</a>
+                                            <a href="#" data-case-goto="cs-solution-{{ $i }}" data-case-spy="cs-solution-{{ $i }}" class="case-nav-link block tracking-widest">04 Solution</a>
+                                            <a href="#" data-case-goto="cs-journey-{{ $i }}" data-case-spy="cs-journey-{{ $i }}" class="case-nav-link block tracking-widest">05 The Journey</a>
+                                            <a href="#" data-case-goto="cs-outcomes-{{ $i }}" data-case-spy="cs-outcomes-{{ $i }}" class="case-nav-link block tracking-widest">06 Outcomes</a>
+                                        </nav>
+                                    </div>
+                                </aside>
+
+                                {{-- RIGHT: GRANULAR CONTENT MODULES --}}
+                                <div class="lg:col-span-9">
+
+                                    {{-- SECTION 1: OVERVIEW --}}
+                                    <section id="cs-overview-{{ $i }}" class="case-section scroll-mt-28">
+                                        <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-white/40">• Home / Portfolio / {{ $p['category'] }} / {{ $p['name'] }}</p>
+                                        <h3 class="mt-5 font-display text-5xl font-black tracking-tight text-white md:text-7xl">{{ $p['name'] }}</h3>
+                                        <p class="mt-3 font-mono text-xs uppercase tracking-[0.3em] text-volt">{{ $p['tier'] }}</p>
+
+                                        {{-- Tag cloud --}}
+                                        <div class="mt-6 flex flex-wrap gap-2">
+                                            @foreach ($p['tags'] as $tag)
+                                                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-white/70">{{ $tag }}</span>
+                                            @endforeach
+                                        </div>
+
+                                        <p class="mt-8 max-w-2xl text-base leading-relaxed text-white/65">{{ $p['overview'] }}</p>
+
+                                        {{-- Centerpiece multi-device mockup grid --}}
+                                        <div class="mt-10 grid grid-cols-2 gap-4 {{ $showcaseCount >= 5 ? 'md:grid-cols-5' : ($showcaseCount === 4 ? 'md:grid-cols-4' : ($showcaseCount === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2')) }}">
+                                            @foreach ($showcase as $si => $shot)
+                                                @php
+                                                    $shotLabel = $shot === 'hero-mockup.png'
+                                                        ? 'Hero · Main Mockup'
+                                                        : 'Screen ' . str_pad((int) str_replace(['screen-', '.png'], '', $shot), 2, '0', STR_PAD_LEFT);
+                                                @endphp
+                                                <div class="case-mock {{ $si === $featuredPos ? 'is-featured' : '' }} overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
+                                                    <img
+                                                        src="{{ asset('Assets/Profile/' . $p['slug'] . '/' . $shot) }}"
+                                                        alt="{{ $p['name'] }} — {{ $shot === 'hero-mockup.png' ? 'main dashboard' : 'interface ' . $si }}"
+                                                        loading="lazy"
+                                                        data-lightbox-src="{{ asset('Assets/Profile/' . $p['slug'] . '/' . $shot) }}"
+                                                        data-lightbox-caption="{{ $p['name'] }} — {{ $shotLabel }}"
+                                                        class="case-zoom h-full w-full object-cover object-top">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+
+                                    {{-- SECTION 2: THE CHALLENGE --}}
+                                    <section id="cs-challenge-{{ $i }}" class="case-section scroll-mt-28 pt-24">
+                                        <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">Challenges</p>
+                                        <h4 class="mt-4 font-display text-3xl font-black uppercase tracking-tight text-white md:text-4xl">The Challenge</h4>
+                                        <p class="mt-6 max-w-2xl text-base leading-relaxed text-white/65">{{ $p['challenge'] }}</p>
+                                    </section>
+
+                                    {{-- SECTION 3: PROBLEM --}}
+                                    <section id="cs-problem-{{ $i }}" class="case-section scroll-mt-28 pt-24">
+                                        <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">The Friction</p>
+                                        <h4 class="mt-4 font-display text-3xl font-black uppercase tracking-tight text-white md:text-4xl">Problem Statement</h4>
+                                        <ul class="mt-8 space-y-4">
+                                            @foreach ($p['problem'] as $item)
+                                                <li class="flex gap-4 border border-white/10 bg-white/[0.03] p-5">
+                                                    <span class="mt-1 h-2 w-2 shrink-0 rotate-45 bg-volt"></span>
+                                                    <span class="text-base leading-relaxed text-white/70">{{ $item }}</span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </section>
+
+                                    {{-- SECTION 4: SOLUTION --}}
+                                    <section id="cs-solution-{{ $i }}" class="case-section scroll-mt-28 pt-24">
+                                        <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">Our Solution</p>
+                                        <h4 class="mt-4 font-display text-3xl font-black uppercase tracking-tight text-white md:text-4xl">The Solution</h4>
+                                        <ul class="mt-8 space-y-6">
+                                            @foreach ($p['solution'] as $item)
+                                                @php [$head, $rest] = array_pad(explode(':', $item, 2), 2, ''); @endphp
+                                                <li class="border-l-2 border-volt pl-5">
+                                                    <p class="font-display text-lg font-bold text-white">{{ $head }}:</p>
+                                                    @if ($rest !== '')
+                                                        <p class="mt-1 text-base leading-relaxed text-white/60">{{ trim($rest) }}</p>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </section>
+
+                                    {{-- SECTION 5: THE JOURNEY --}}
+                                    <section id="cs-journey-{{ $i }}" class="case-section scroll-mt-28 pt-24">
+                                        <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">The Journey</p>
+                                        <h4 class="mt-4 font-display text-3xl font-black uppercase tracking-tight text-white md:text-4xl">The Journey</h4>
+                                        <ol class="mt-8 space-y-6">
+                                            @foreach ($p['journey'] as $j => $step)
+                                                <li class="flex gap-5">
+                                                    <span class="font-display text-2xl font-black leading-none text-volt">{{ str_pad($j + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                                                    <p class="max-w-xl text-base leading-relaxed text-white/65">{{ $step }}</p>
+                                                </li>
+                                            @endforeach
+                                        </ol>
+                                    </section>
+
+                                    {{-- SECTION 6: OUTCOMES --}}
+                                    <section id="cs-outcomes-{{ $i }}" class="case-section scroll-mt-28 pt-24">
+                                        <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">Outcomes</p>
+                                        <h4 class="mt-4 font-display text-3xl font-black uppercase tracking-tight text-white md:text-4xl">Outcomes</h4>
+                                        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+                                            @foreach ($p['outcomes'] as $outcome)
+                                                <div class="border border-white/10 bg-white/[0.03] p-6">
+                                                    <span class="font-mono text-volt">✓</span>
+                                                    <p class="mt-3 text-base font-semibold leading-snug text-white/85">{{ $outcome }}</p>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+
+                                    {{-- GALLERY --}}
+                                    <section class="pt-24">
+                                        <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">Screen Gallery</p>
+                                        <h4 class="mt-4 font-display text-3xl font-black uppercase tracking-tight text-white md:text-4xl">Captures</h4>
+                                        <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                                            @foreach ($files as $fi => $shot)
+                                                <figure class="group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
+                                                    <img
+                                                        src="{{ asset('Assets/Profile/' . $p['slug'] . '/' . $shot) }}"
+                                                        alt="{{ $p['name'] }} — screen {{ $fi }}"
+                                                        loading="lazy"
+                                                        data-lightbox-src="{{ asset('Assets/Profile/' . $p['slug'] . '/' . $shot) }}"
+                                                        data-lightbox-caption="{{ $p['name'] }} — {{ $shot === 'hero-mockup.png' ? 'Hero · Main Mockup' : 'Screen ' . str_pad($fi, 2, '0', STR_PAD_LEFT) }}"
+                                                        class="case-gallery-img case-zoom h-full w-full object-cover object-top">
+                                                    <figcaption class="flex items-center justify-between px-4 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+                                                        <span>{{ $shot === 'hero-mockup.png' ? 'HERO · MAIN' : 'SCREEN ' . str_pad($fi, 2, '0', STR_PAD_LEFT) }}</span>
+                                                        <span class="text-volt/70">{{ $p['slug'] }}</span>
+                                                    </figcaption>
+                                                </figure>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- ================================================================
+            LIGHTBOX — FULL-SCREEN IMAGE VIEWER
+            ================================================================ --}}
+            <div id="lightbox" class="fixed inset-0 z-[90] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+                <button type="button" data-lightbox-close class="lightbox-btn absolute right-6 top-6 z-10 text-4xl leading-none text-white/70" aria-label="Close viewer">×</button>
+
+                <button type="button" data-lightbox-prev class="lightbox-btn absolute left-4 top-1/2 z-10 -translate-y-1/2 p-3 text-3xl text-white/70" aria-label="Previous screenshot">‹</button>
+
+                <figure class="flex max-h-full max-w-6xl flex-col items-center gap-4">
+                    <div class="relative flex max-h-[78vh] max-w-full items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-black/40">
+                        <img id="lightbox-img" src="" alt="Screenshot full view" class="max-h-[78vh] max-w-full object-contain">
+                    </div>
+                    <figcaption class="flex flex-col items-center gap-2 text-center">
+                        <span id="lightbox-caption" class="font-mono text-xs uppercase tracking-[0.25em] text-white/70"></span>
+                        <span id="lightbox-count" class="font-mono text-[10px] uppercase tracking-[0.3em] text-volt"></span>
+                    </figcaption>
+                    <div id="lightbox-dots" class="flex flex-wrap justify-center gap-1.5"></div>
+                </figure>
+
+                <button type="button" data-lightbox-next class="lightbox-btn absolute right-4 top-1/2 z-10 -translate-y-1/2 p-3 text-3xl text-white/70" aria-label="Next screenshot">›</button>
+            </div>
+
+            {{-- ================================================================
+            SERVICES — HOVER-SHIFT GRID
+            ================================================================ --}}
+            <section id="services" class="relative border-t border-white/5 py-24 lg:py-36">
+                <div class="mx-auto max-w-[1600px] px-6 lg:px-12">
+                    <div class="reveal mb-16 flex flex-col gap-6 lg:mb-24 lg:flex-row lg:items-end lg:justify-between">
+                        <div>
+                            <p class="font-mono text-xs uppercase tracking-[0.3em] text-accent">04 / SERVICES</p>
+                            <h2 class="mt-6 font-display font-black uppercase leading-[0.85] tracking-tighter text-[clamp(3.2rem,8vw,8rem)]">
+                                WHAT I<br><span class="text-blood/80">DELIVER</span>
+                            </h2>
+                        </div>
+                        <p class="max-w-xs text-sm leading-relaxed text-white/45">
+                            Specialized capabilities — from code to community, built to be impossible to ignore.
+                        </p>
+                    </div>
+
+                    <div class="grid gap-px border border-white/10 bg-white/10 md:grid-cols-2 xl:grid-cols-3">
+
+                        <div class="reveal group relative bg-ink p-8 transition-colors duration-500 lg:p-10">
+                            <p class="font-mono text-xs tracking-[0.3em] text-accent/60">S.01</p>
+                            <h3 class="mt-8 font-display text-3xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">Web Development</h3>
+                            <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/45">Full-stack web apps, company profiles, and systems built with PHP &amp; Laravel.</p>
+                            <span class="absolute bottom-8 right-8 font-mono text-xs text-accent opacity-0 transition-opacity duration-500 group-hover:opacity-100">→</span>
+                        </div>
+
+                        <div class="reveal group relative bg-ink p-8 transition-colors duration-500 lg:p-10">
+                            <p class="font-mono text-xs tracking-[0.3em] text-accent/60">S.02</p>
+                            <h3 class="mt-8 font-display text-3xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">Public Speaking</h3>
+                            <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/45">Talks, moderation, and MC — communicating ideas clearly on stage and in front of any audience.</p>
+                            <span class="absolute bottom-8 right-8 font-mono text-xs text-accent opacity-0 transition-opacity duration-500 group-hover:opacity-100">→</span>
+                        </div>
+
+                        <div class="reveal group relative bg-ink p-8 transition-colors duration-500 lg:p-10">
+                            <p class="font-mono text-xs tracking-[0.3em] text-accent/60">S.03</p>
+                            <h3 class="mt-8 font-display text-3xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">Database &amp; SQL</h3>
+                            <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/45">Relational data modeling, queries, reporting, and inventory systems that stay accurate.</p>
+                            <span class="absolute bottom-8 right-8 font-mono text-xs text-accent opacity-0 transition-opacity duration-500 group-hover:opacity-100">→</span>
+                        </div>
+
+                        <div class="reveal group relative bg-ink p-8 transition-colors duration-500 lg:p-10">
+                            <p class="font-mono text-xs tracking-[0.3em] text-accent/60">S.04</p>
+                            <h3 class="mt-8 font-display text-3xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">IT Support &amp; Network</h3>
+                            <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/45">Server &amp; network troubleshooting that keeps operations running with minimal downtime.</p>
+                            <span class="absolute bottom-8 right-8 font-mono text-xs text-accent opacity-0 transition-opacity duration-500 group-hover:opacity-100">→</span>
+                        </div>
+
+                        <div class="reveal group relative bg-ink p-8 transition-colors duration-500 lg:p-10">
+                            <p class="font-mono text-xs tracking-[0.3em] text-accent/60">S.05</p>
+                            <h3 class="mt-8 font-display text-3xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">Office &amp; Admin Systems</h3>
+                            <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/45">Microsoft Office, Excel reporting, digital archiving, and document workflows.</p>
+                            <span class="absolute bottom-8 right-8 font-mono text-xs text-accent opacity-0 transition-opacity duration-500 group-hover:opacity-100">→</span>
+                        </div>
+
+                        <div class="reveal group relative bg-ink p-8 transition-colors duration-500 lg:p-10">
+                            <p class="font-mono text-xs tracking-[0.3em] text-accent/60">S.06</p>
+                            <h3 class="mt-8 font-display text-3xl font-extrabold uppercase tracking-tight text-white lg:text-4xl">Event &amp; Community</h3>
+                            <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/45">Event planning, sponsorship, and moderation that bridge knowledge and opportunity.</p>
+                            <span class="absolute bottom-8 right-8 font-mono text-xs text-accent opacity-0 transition-opacity duration-500 group-hover:opacity-100">→</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {{-- ================================================================
+            CONTACT — BIG CTA
+            ================================================================ --}}
+            <section id="contact" class="relative overflow-hidden border-t border-white/5 py-24 lg:py-40">
+                <div class="spotlight pointer-events-none absolute inset-0 opacity-60"></div>
+
+                <div class="relative mx-auto flex max-w-[1600px] flex-col items-center px-6 text-center lg:px-12">
+                    <p class="reveal font-mono text-xs uppercase tracking-[0.3em] text-accent">05 / CONTACT</p>
+                    <h2 class="reveal mt-8 font-display font-black uppercase leading-[0.82] tracking-tighter text-[clamp(3.6rem,11vw,11rem)]">
+                        <span class="block text-white">LET'S WORK</span>
+                        <span class="block text-blood/80">TOGETHER<span class="text-accent">.</span></span>
+                    </h2>
+                    <p class="reveal mt-8 max-w-md text-sm leading-relaxed text-white/45">
+                        Got a bold idea that needs a builder? Drop a line — open for projects, collaborations, and internships.
+                    </p>
+                    <div class="reveal mt-12 flex flex-col items-center gap-4 sm:flex-row">
+                        <button data-drawer-open class="accent-btn px-8 py-4 font-mono text-xs uppercase tracking-[0.25em]">
+                            START A PROJECT
+                        </button>
+                        <a href="{{ asset('Assets/CV/CV_Rama.pdf') }}" download class="hollow-btn px-8 py-4 font-mono text-xs uppercase tracking-[0.25em]">
+                            VIEW CV
+                        </a>
+                        <a href="https://www.linkedin.com/in/ramadhani-pasulleri-52922324b/" target="_blank" rel="noopener" class="hollow-btn px-8 py-4 font-mono text-xs uppercase tracking-[0.25em]">
+                            LINKEDIN
+                        </a>
+                    </div>
+                    <a href="https://wa.me/62895342586921" target="_blank" rel="noopener" class="reveal mt-8 inline-flex items-center gap-3 font-mono text-sm uppercase tracking-[0.2em] text-white/60 transition-colors hover:text-volt">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.84 9.84 0 0 0 12.04 2zm5.82 14.13c-.24.68-1.4 1.3-1.94 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.91-1.25-4.81-4.18-4.95-4.37-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.58-.36.78-.36l.56.01c.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.09.19-.14.31-.28.48l-.42.5c-.14.14-.28.29-.12.56.16.27.72 1.19 1.55 1.93 1.07.95 1.97 1.25 2.25 1.39.28.14.44.12.6-.07.17-.19.7-.81.88-1.09.19-.28.37-.23.62-.14.25.09 1.6.75 1.87.89.27.14.45.21.52.32.07.12.07.66-.17 1.35z"/></svg>
+                        0895-3425-8692
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        {{-- ================================================================
+        FOOTER
+        ================================================================ --}}
+        <footer class="border-t border-white/5">
+            <div class="mx-auto flex max-w-[1600px] flex-col items-start justify-between gap-10 px-6 py-14 sm:flex-row sm:items-end lg:px-12">
+                <div>
+                    <p class="font-display text-3xl font-black tracking-tighter text-white">RAMA<span class="text-accent">.</span></p>
+                    <p class="mt-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/45">WEB DEVELOPER / IT SUPPORT</p>
+                </div>
+                <div class="flex flex-wrap gap-8 font-mono text-xs uppercase tracking-[0.2em] text-white/45">
+                    <a href="#home" class="transition-colors hover:text-accent">TOP ↑</a>
+                    <a href="https://www.linkedin.com/in/ramadhani-pasulleri-52922324b/" target="_blank" rel="noopener" class="transition-colors hover:text-accent">LINKEDIN</a>
+                    <a href="mailto:ramadhanipasulleri123@gmail.com" class="transition-colors hover:text-accent">EMAIL</a>
+                    <a href="{{ asset('Assets/CV/CV_Rama.pdf') }}" download class="transition-colors hover:text-accent">CV</a>
+                </div>
+                <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">© <span id="year">2026</span> MUHAMMAD RAMADHANI PASULLERI</p>
+            </div>
+        </footer>
+
+        {{-- ================================================================
+        INFODRAWER — OVERLAY + SIDE PANEL
+        ================================================================ --}}
+        <div id="drawer-overlay" class="pointer-events-none fixed inset-0 z-[60] bg-black/70 opacity-0 backdrop-blur-sm transition-opacity duration-500"></div>
+
+        <aside id="info-drawer" class="fixed right-0 top-0 z-[70] flex h-full w-full max-w-xl translate-x-full flex-col bg-[#0B0B16] text-white shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+            <div class="flex items-center justify-between border-b border-white/10 px-8 py-6">
+                <span class="font-mono text-[10px] uppercase tracking-[0.35em] text-white/40">INFO / CONTACT</span>
+                <button data-drawer-close class="group inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-white/60 transition-colors hover:text-accent" aria-label="Close panel">
+                    CLOSE
+                    <span class="flex h-9 w-9 items-center justify-center border border-white/20 transition-colors group-hover:border-accent">✕</span>
+                </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto px-8 py-10 lg:px-10">
+                <p class="font-mono text-[10px] uppercase tracking-[0.35em] text-accent">OPEN FOR PROJECTS &amp; COLLABORATIONS</p>
+                <h2 id="drawer-title" class="mt-6 font-display font-black uppercase leading-[0.85] tracking-tighter text-[clamp(3.2rem,7vw,6rem)]">
+                    LET'S<br><span class="text-accent">WORK</span>
+                </h2>
+                <p class="mt-6 max-w-sm text-sm leading-relaxed text-white/45">
+                    Tell me about your project. The more details, the better — I reply to every serious inquiry within 48 hours.
+                </p>
+
+                <form id="drawer-form" class="mt-12 space-y-9" novalidate>
+                    <div>
+                        <label class="mb-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-white/40" for="field-name">YOUR NAME *</label>
+                        <input id="field-name" name="name" type="text" class="field-input" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label class="mb-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-white/40" for="field-email">EMAIL ADDRESS *</label>
+                        <input id="field-email" name="email" type="email" class="field-input" placeholder="john@studio.com" required>
+                    </div>
+                    <div>
+                        <label class="mb-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-white/40" for="field-service">SERVICE</label>
+                        <select id="field-service" name="service" class="field-input">
+                            <option value="" disabled selected>Select a service…</option>
+                            <option>Web Development</option>
+                            <option>Mobile Development</option>
+                            <option>Database &amp; SQL</option>
+                            <option>IT Support &amp; Network</option>
+                            <option>Office &amp; Admin Systems</option>
+                            <option>Event &amp; Community</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="mb-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-white/40" for="field-budget">PROJECT TYPE</label>
+                        <select id="field-budget" name="budget" class="field-input">
+                            <option value="" disabled selected>Select type…</option>
+                            <option>Web Application</option>
+                            <option>Mobile App</option>
+                            <option>Company Profile</option>
+                            <option>Internship / Collaboration</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="mb-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-white/40" for="field-message">PROJECT DETAILS *</label>
+                        <textarea id="field-message" name="message" rows="4" class="field-input resize-none" placeholder="Tell me everything…" required></textarea>
+                    </div>
+
+                    <button type="submit" id="drawer-submit" class="accent-btn w-full px-8 py-4 font-mono text-xs uppercase tracking-[0.3em]">
+                        SEND REQUEST →
+                    </button>
+                </form>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 px-8 py-6 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+                <span>RAMADHANIPASULLERI123@GMAIL.COM</span>
+                <a href="https://wa.me/62895342586921" target="_blank" rel="noopener" class="transition-colors hover:text-volt">WA · 0895-3425-8692</a>
+                <span>BATU, EAST JAVA — INDONESIA</span>
+            </div>
+        </aside>
+    </div>
+
+    {{-- ================================================================
+    STRUCTURAL JAVASCRIPT
+    ================================================================ --}}
+    <script>
+        (function () {
+            'use strict';
+
+            /* ============ INFO DRAWER ============ */
+            var drawer = document.getElementById('info-drawer');
+            var overlay = document.getElementById('drawer-overlay');
+            var body = document.body;
+
+            function openDrawer() {
+                drawer.classList.remove('translate-x-full');
+                drawer.classList.add('translate-x-0');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                overlay.classList.add('opacity-100', 'pointer-events-auto');
+                body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                drawer.classList.add('translate-x-full');
+                drawer.classList.remove('translate-x-0');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                body.style.overflow = '';
+            }
+
+            document.querySelectorAll('[data-drawer-open]').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    closeMobileMenu();
+                    openDrawer();
+                });
+            });
+
+            document.querySelectorAll('[data-drawer-close]').forEach(function (btn) {
+                btn.addEventListener('click', closeDrawer);
+            });
+
+            overlay.addEventListener('click', closeDrawer);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    closeDrawer();
+                    closeMobileMenu();
+                }
+            });
+
+            /* ============ DRAWER FORM (DEMO SUBMIT) ============ */
+            var form = document.getElementById('drawer-form');
+            var submitBtn = document.getElementById('drawer-submit');
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var original = submitBtn.textContent;
+                    submitBtn.textContent = 'REQUEST SENT ✓';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.7';
+                    setTimeout(function () {
+                        form.reset();
+                        submitBtn.textContent = original;
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                    }, 2800);
+                });
+            }
+
+            /* ============ MOBILE MENU ============ */
+            var menuToggle = document.getElementById('menu-toggle');
+            var mobileMenu = document.getElementById('mobile-menu');
+            var mobileOverlay = document.getElementById('mobile-overlay');
+            var menuOpen = false;
+
+            function setMenuState(open) {
+                menuOpen = open;
+                mobileMenu.classList.toggle('hidden', !open);
+                mobileOverlay.classList.toggle('hidden', !open);
+                menuToggle.setAttribute('aria-expanded', String(open));
+                var bars = menuToggle.querySelectorAll('span');
+                if (open) {
+                    bars[0].style.transform = 'translateY(4px) rotate(45deg)';
+                    bars[1].style.opacity = '0';
+                    bars[2].style.transform = 'translateY(-4px) rotate(-45deg)';
+                } else {
+                    bars[0].style.transform = '';
+                    bars[1].style.opacity = '';
+                    bars[2].style.transform = '';
+                }
+            }
+
+            function closeMobileMenu() {
+                if (menuOpen) setMenuState(false);
+            }
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function () {
+                    setMenuState(!menuOpen);
+                });
+            }
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', closeMobileMenu);
+            }
+            document.querySelectorAll('.mobile-link').forEach(function (link) {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            /* ============ TYPEWRITER (CAREER ROLES) ============ */
+            var typeEl = document.getElementById('type-role');
+            var roles = ['WEB DEVELOPER', 'IT SUPPORT', 'FLUTTER DEVELOPER', 'UI/UX ENTHUSIAST'];
+            var roleIndex = 0;
+            var charIndex = 0;
+            var deleting = false;
+
+            function typeTick() {
+                var word = roles[roleIndex];
+
+                if (!deleting) {
+                    charIndex++;
+                    typeEl.textContent = word.substring(0, charIndex);
+                    if (charIndex >= word.length) {
+                        deleting = true;
+                        setTimeout(typeTick, 1500);
+                        return;
+                    }
+                    setTimeout(typeTick, 85);
+                } else {
+                    charIndex--;
+                    typeEl.textContent = word.substring(0, charIndex);
+                    if (charIndex <= 0) {
+                        deleting = false;
+                        roleIndex = (roleIndex + 1) % roles.length;
+                    }
+                    setTimeout(typeTick, 40);
+                }
+            }
+
+            if (typeEl) typeTick();
+
+            /* ============ SCROLL SPY (NAV ACTIVE STATE) ============ */
+            var navLinks = document.querySelectorAll('.nav-link');
+            var spyTargets = [];
+            ['home', 'about', 'work', 'experience', 'portfolio', 'services', 'contact'].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) spyTargets.push({ id: id, el: el });
+            });
+
+            function updateNav() {
+                var scrollPos = window.scrollY + 140;
+                var currentId = 'home';
+
+                spyTargets.forEach(function (target) {
+                    if (target.el.offsetTop <= scrollPos) {
+                        currentId = target.id;
+                    }
+                });
+
+                if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+                    currentId = 'contact';
+                }
+
+                navLinks.forEach(function (link) {
+                    var href = link.getAttribute('href').replace('#', '');
+                    link.classList.toggle('is-active', href === currentId);
+                });
+            }
+
+            window.addEventListener('scroll', updateNav, { passive: true });
+            updateNav();
+
+            /* ============ SCROLL REVEAL ============ */
+            var revealEls = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+                revealEls.forEach(function (el) {
+                    observer.observe(el);
+                });
+            } else {
+                revealEls.forEach(function (el) {
+                    el.classList.add('is-visible');
+                });
+            }
+
+            /* ============ FOOTER YEAR ============ */
+            var yearEl = document.getElementById('year');
+            if (yearEl) {
+                yearEl.textContent = String(new Date().getFullYear());
+            }
+
+            /* ============ CASE STUDY (OPEN / CLOSE / SCROLL-SPY) ============ */
+            var caseStudy = document.getElementById('case-study');
+            var caseScroll = document.getElementById('case-scroll');
+            var caseMeta = document.getElementById('case-meta');
+            var casePanels = document.querySelectorAll('.case-panel');
+            var caseTotal = casePanels.length;
+            var caseActive = 0;
+            var caseNavLinks = [];
+            var caseObserver = null;
+            var caseScrollHandler = null;
+
+            function resetCaseNav() {
+                caseNavLinks.forEach(function (link) {
+                    link.classList.remove('is-active');
+                });
+            }
+
+            function openCase(index) {
+                caseActive = index;
+                var panel = document.querySelector('[data-case-panel="' + index + '"]');
+                if (!panel) return;
+
+                casePanels.forEach(function (p) {
+                    p.hidden = (p !== panel);
+                });
+
+                resetCaseNav();
+                if (caseMeta) {
+                    var num = String(index + 1);
+                    caseMeta.textContent = num + ' / ' + String(caseTotal).padStart(2, '0');
+                }
+
+                caseStudy.classList.remove('invisible');
+                // Force reflow so transition runs after hidden state flips
+                void caseStudy.offsetWidth;
+                caseStudy.classList.remove('opacity-0');
+                caseStudy.classList.add('opacity-100');
+                body.style.overflow = 'hidden';
+
+                if (caseScroll) caseScroll.scrollTop = 0;
+
+                // Rebuild scroll-spy links for the active panel
+                if (caseObserver) {
+                    caseObserver.disconnect();
+                    caseObserver = null;
+                }
+                caseNavLinks = Array.prototype.slice.call(panel.querySelectorAll('.case-nav-link'));
+
+                if ('IntersectionObserver' in window && caseNavLinks.length) {
+                    caseObserver = new IntersectionObserver(function (entries) {
+                        // Recompute from current geometry so the section nearest the band wins.
+                        var activeId = null;
+                        var maxTop = -Infinity;
+                        var band = caseScroll.clientHeight * 0.35;
+
+                        caseNavLinks.forEach(function (link) {
+                            var target = document.getElementById(link.getAttribute('data-case-spy'));
+                            if (!target) return;
+                            var top = target.getBoundingClientRect().top - caseScroll.getBoundingClientRect().top;
+                            if (top <= band && top > maxTop) {
+                                maxTop = top;
+                                activeId = target.id;
+                            }
+                        });
+
+                        if (!activeId) return;
+
+                        resetCaseNav();
+                        caseNavLinks.forEach(function (link) {
+                            if (link.getAttribute('data-case-spy') === activeId) {
+                                link.classList.add('is-active');
+                            }
+                        });
+                    }, { root: caseScroll, threshold: 0, rootMargin: '0px 0px -65% 0px' });
+
+                    caseNavLinks.forEach(function (link) {
+                        var target = document.getElementById(link.getAttribute('data-case-spy'));
+                        if (target) caseObserver.observe(target);
+                    });
+                }
+
+                // Attach the scroll fallback once; it reads the live caseNavLinks array.
+                if (!caseScrollHandler && caseScroll) {
+                    caseScrollHandler = function () {
+                        var activeId = null;
+                        var maxTop = -Infinity;
+                        var band = caseScroll.clientHeight * 0.35;
+
+                        caseNavLinks.forEach(function (link) {
+                            var target = document.getElementById(link.getAttribute('data-case-spy'));
+                            if (!target) return;
+                            var top = target.getBoundingClientRect().top - caseScroll.getBoundingClientRect().top;
+                            if (top <= band && top > maxTop) {
+                                maxTop = top;
+                                activeId = target.id;
+                            }
+                        });
+
+                        if (!activeId) return;
+
+                        resetCaseNav();
+                        caseNavLinks.forEach(function (link) {
+                            if (link.getAttribute('data-case-spy') === activeId) {
+                                link.classList.add('is-active');
+                            }
+                        });
+                    };
+                    caseScroll.addEventListener('scroll', caseScrollHandler, { passive: true });
+                }
+            }
+
+            function closeCase() {
+                caseStudy.classList.add('opacity-0');
+                caseStudy.classList.remove('opacity-100');
+                body.style.overflow = '';
+                setTimeout(function () {
+                    caseStudy.classList.add('invisible');
+                    casePanels.forEach(function (p) {
+                        p.hidden = true;
+                    });
+                }, 500);
+            }
+
+            /* ============ LIGHTBOX (FULL-SCREEN SCREENSHOT VIEWER) ============ */
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightbox-img');
+            var lightboxCaption = document.getElementById('lightbox-caption');
+            var lightboxCount = document.getElementById('lightbox-count');
+            var lightboxDots = document.getElementById('lightbox-dots');
+            var lightboxItems = [];
+            var lightboxIndex = 0;
+
+            function lightboxStep(dir) {
+                lightboxIndex = (lightboxIndex + dir + lightboxItems.length) % lightboxItems.length;
+                renderLightboxItem();
+            }
+
+            function renderLightboxItem() {
+                var item = lightboxItems[lightboxIndex];
+                if (!item) return;
+                lightboxImg.style.opacity = '0';
+                lightboxImg.src = item.src;
+                lightboxImg.alt = item.caption;
+                lightboxCaption.textContent = item.caption;
+                lightboxCount.textContent = (lightboxIndex + 1) + ' / ' + lightboxItems.length;
+
+                // Dots
+                var dots = lightboxDots.querySelectorAll('.lightbox-dot');
+                dots.forEach(function (dot, i) {
+                    dot.classList.toggle('is-active', i === lightboxIndex);
+                });
+            }
+
+            function buildLightboxDots() {
+                lightboxDots.innerHTML = '';
+                lightboxItems.forEach(function (_, i) {
+                    var dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'lightbox-dot h-2 w-2 rounded-full bg-white/25';
+                    dot.setAttribute('aria-label', 'Go to screenshot ' + (i + 1));
+                    dot.addEventListener('click', function () {
+                        lightboxIndex = i;
+                        renderLightboxItem();
+                    });
+                    lightboxDots.appendChild(dot);
+                });
+            }
+
+            function openLightbox(imgEl) {
+                var scope;
+                var panel = imgEl.closest('.case-panel');
+                if (panel) {
+                    scope = panel;
+                } else if (imgEl.closest('.cert-stream')) {
+                    scope = imgEl.closest('.cert-stream');
+                } else if (imgEl.closest('.timeline-gallery')) {
+                    scope = imgEl.closest('.timeline-gallery');
+                } else {
+                    return;
+                }
+                var images = Array.prototype.slice.call(scope.querySelectorAll('[data-lightbox-src]'));
+                // Deduplicate: a screenshot may appear in both the showcase strip and the gallery.
+                var seen = {};
+                images = images.filter(function (img) {
+                    var src = img.getAttribute('data-lightbox-src');
+                    if (seen[src]) return false;
+                    seen[src] = true;
+                    return true;
+                });
+                lightboxItems = images.map(function (img) {
+                    return {
+                        src: img.getAttribute('data-lightbox-src'),
+                        caption: img.getAttribute('data-lightbox-caption') || img.alt
+                    };
+                });
+                lightboxIndex = Math.max(0, images.indexOf(imgEl));
+                if (lightboxIndex >= lightboxItems.length) lightboxIndex = 0;
+
+                buildLightboxDots();
+                renderLightboxItem();
+
+                lightbox.classList.remove('hidden');
+                lightbox.classList.add('flex');
+                // Reflow, then fade in
+                void lightbox.offsetWidth;
+                lightbox.classList.remove('opacity-0');
+                lightbox.classList.add('opacity-100');
+                body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.add('opacity-0');
+                lightbox.classList.remove('opacity-100');
+                body.style.overflow = '';
+                setTimeout(function () {
+                    lightbox.classList.add('hidden');
+                    lightbox.classList.remove('flex');
+                    lightboxImg.src = '';
+                }, 300);
+            }
+
+            // Image transition on load
+            if (lightboxImg) {
+                lightboxImg.addEventListener('load', function () {
+                    lightboxImg.style.opacity = '1';
+                });
+            }
+
+            // Open on click for any image with data-lightbox-src
+            document.addEventListener('click', function (e) {
+                var img = e.target.closest('[data-lightbox-src]');
+                if (!img) return;
+                e.preventDefault();
+                openLightbox(img);
+            });
+
+            // Lightbox controls
+            document.querySelectorAll('[data-lightbox-close]').forEach(function (btn) {
+                btn.addEventListener('click', closeLightbox);
+            });
+            document.querySelectorAll('[data-lightbox-prev]').forEach(function (btn) {
+                btn.addEventListener('click', function () { lightboxStep(-1); });
+            });
+            document.querySelectorAll('[data-lightbox-next]').forEach(function (btn) {
+                btn.addEventListener('click', function () { lightboxStep(1); });
+            });
+            if (lightbox) {
+                lightbox.addEventListener('click', function (e) {
+                    if (e.target === lightbox) closeLightbox();
+                });
+            }
+
+            document.querySelectorAll('[data-case-open]').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    openCase(parseInt(btn.getAttribute('data-case-open'), 10));
+                });
+                btn.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openCase(parseInt(btn.getAttribute('data-case-open'), 10));
+                    }
+                });
+            });
+
+            document.querySelectorAll('[data-case-close]').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    closeCase();
+                });
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    if (!lightbox.classList.contains('hidden')) {
+                        closeLightbox();
+                    } else if (!caseStudy.classList.contains('invisible')) {
+                        closeCase();
+                    }
+                }
+                if (e.key === 'ArrowLeft' && !lightbox.classList.contains('hidden')) {
+                    lightboxStep(-1);
+                }
+                if (e.key === 'ArrowRight' && !lightbox.classList.contains('hidden')) {
+                    lightboxStep(1);
+                }
+            });
+
+            // Timeline node click → smooth scroll inside the case scroll container
+            document.addEventListener('click', function (e) {
+                var link = e.target.closest('[data-case-goto]');
+                if (!link) return;
+                e.preventDefault();
+                var target = document.getElementById(link.getAttribute('data-case-goto'));
+                if (target && caseScroll) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+
+            /* ============ HORIZONTAL PROJECT SLIDER ============ */
+            var slider = document.getElementById('project-slider');
+            var sliderProgress = document.getElementById('slider-progress');
+            var sliderPrev = document.getElementById('slider-prev');
+            var sliderNext = document.getElementById('slider-next');
+
+            function updateSliderProgress() {
+                if (!slider || !sliderProgress) return;
+                var max = slider.scrollWidth - slider.clientWidth;
+                if (max <= 0) {
+                    sliderProgress.style.left = '0%';
+                    return;
+                }
+                var pct = (slider.scrollLeft / max) * 100;
+                // align the indicator's RIGHT edge to pct% of the track so the
+                // 64px block always stays inside and never covers the arrows
+                var offset = (pct * 64 / 100).toFixed(2);
+                sliderProgress.style.left = 'calc(' + pct + '% - ' + offset + 'px)';
+            }
+
+            function slideBy(dir) {
+                if (!slider) return;
+                var card = slider.querySelector('article');
+                if (!card) return;
+                var step = card.getBoundingClientRect().width + 24; // 24px gap
+                slider.scrollBy({ left: dir * step, behavior: 'smooth' });
+            }
+
+            if (slider) {
+                slider.addEventListener('scroll', updateSliderProgress, { passive: true });
+                window.addEventListener('resize', updateSliderProgress);
+                updateSliderProgress();
+            }
+            if (sliderPrev) sliderPrev.addEventListener('click', function () { slideBy(-1); });
+            if (sliderNext) sliderNext.addEventListener('click', function () { slideBy(1); });
+        })();
+    </script>
+</body>
+</html>
