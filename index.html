@@ -326,6 +326,102 @@
             .reveal { opacity: 1; transform: none; transition: none; }
             .scroll-smooth { scroll-behavior: auto; }
         }
+    
+        /* ============ MOBILE FIXES ============ */
+        /* iOS Safari smooth scrolling for slider */
+        .scrollbar-none {
+            -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
+        }
+        
+        /* Ensure scroll snap works on mobile */
+        .snap-x {
+            scroll-snap-type: x mandatory;
+            -ms-scroll-snap-type: x mandatory;
+            -webkit-scroll-snap-type: x mandatory;
+        }
+        .snap-start {
+            scroll-snap-align: start;
+        }
+        .snap-mandatory {
+            scroll-snap-type: x mandatory;
+        }
+        
+        /* Prevent horizontal overflow on mobile */
+        @media (max-width: 640px) {
+            body {
+                overflow-x: hidden;
+            }
+            .snap-x {
+                padding-left: 1.5rem !important;
+                padding-right: 1.5rem !important;
+            }
+            article.snap-start {
+                width: 85vw !important;
+                min-width: 280px;
+            }
+        }
+        
+        /* Drawer fixes for mobile */
+        #info-drawer {
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+            transition: -webkit-transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #info-drawer.translate-x-0 {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+        #drawer-overlay {
+            -webkit-transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Case study modal mobile fixes */
+        #case-study-modal {
+            -webkit-overflow-scrolling: touch;
+        }
+        #case-study-modal .fixed {
+            position: fixed;
+            -webkit-backface-visibility: hidden;
+        }
+        
+        /* Touch targets minimum 44px */
+        @media (max-width: 640px) {
+            button, a[role="button"], [tabindex="0"] {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            .lightbox-btn {
+                width: 48px !important;
+                height: 48px !important;
+            }
+        }
+        
+        /* Image loading fixes */
+        img[loading="lazy"] {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        img[loading="lazy"].loaded {
+            opacity: 1;
+        }
+        
+        /* Prevent zoom on input focus iOS */
+        @media (max-width: 640px) {
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+        }
+        
+        /* Smooth scroll fallback for mobile */
+        @media (prefers-reduced-motion: no-preference) {
+            .scroll-smooth {
+                scroll-behavior: smooth;
+            }
+        }
+
     </style>
 </head>
 
@@ -4505,6 +4601,138 @@
             if (sliderPrev) sliderPrev.addEventListener('click', function () { slideBy(-1); });
             if (sliderNext) sliderNext.addEventListener('click', function () { slideBy(1); });
         })();
-    </script>
+        
+        // ============ TOUCH DRAG FOR SLIDER (MOBILE) ============
+        (function() {
+            var slider = document.getElementById('project-slider');
+            if (!slider) return;
+            
+            var isDown = false;
+            var startX;
+            var scrollLeft;
+            var velocity = 0;
+            var lastX;
+            var lastTime;
+            
+            slider.addEventListener('touchstart', function(e) {
+                isDown = true;
+                slider.classList.add('touch-dragging');
+                startX = e.touches[0].pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+                lastX = e.touches[0].pageX;
+                lastTime = Date.now();
+                velocity = 0;
+            }, { passive: true });
+            
+            slider.addEventListener('touchmove', function(e) {
+                if (!isDown) return;
+                e.preventDefault();
+                var x = e.touches[0].pageX - slider.offsetLeft;
+                var walk = (x - startX) * 1.2; // Scroll faster
+                slider.scrollLeft = scrollLeft - walk;
+                
+                // Calculate velocity for momentum
+                var now = Date.now();
+                var dt = now - lastTime;
+                if (dt > 0) {
+                    velocity = (lastX - x) / dt;
+                }
+                lastX = x;
+                lastTime = now;
+            }, { passive: false });
+            
+            function endTouch() {
+                if (!isDown) return;
+                isDown = false;
+                slider.classList.remove('touch-dragging');
+                
+                // Momentum scrolling
+                if (Math.abs(velocity) > 0.1) {
+                    var momentum = velocity * 500;
+                    var targetScroll = slider.scrollLeft + momentum;
+                    slider.scrollTo({
+                        left: targetScroll,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Snap to nearest card after momentum
+                setTimeout(function() {
+                    var card = slider.querySelector('article');
+                    if (card) {
+                        var cardWidth = card.getBoundingClientRect().width + 24;
+                        var snapIndex = Math.round(slider.scrollLeft / cardWidth);
+                        slider.scrollTo({
+                            left: snapIndex * cardWidth,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 300);
+            }
+            
+            slider.addEventListener('touchend', endTouch, { passive: true });
+            slider.addEventListener('touchcancel', endTouch, { passive: true });
+            
+            // Also support mouse drag for desktop
+            var isMouseDown = false;
+            var mouseStartX;
+            var mouseScrollLeft;
+            
+            slider.addEventListener('mousedown', function(e) {
+                if (e.button !== 0) return; // Only left click
+                isMouseDown = true;
+                slider.classList.add('mouse-dragging');
+                mouseStartX = e.pageX - slider.offsetLeft;
+                mouseScrollLeft = slider.scrollLeft;
+                slider.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+            
+            slider.addEventListener('mousemove', function(e) {
+                if (!isMouseDown) return;
+                e.preventDefault();
+                var x = e.pageX - slider.offsetLeft;
+                var walk = (x - mouseStartX) * 1.2;
+                slider.scrollLeft = mouseScrollLeft - walk;
+            });
+            
+            function endMouse() {
+                if (!isMouseDown) return;
+                isMouseDown = false;
+                slider.classList.remove('mouse-dragging');
+                slider.style.cursor = '';
+            }
+            
+            slider.addEventListener('mouseup', endMouse);
+            slider.addEventListener('mouseleave', endMouse);
+            
+            // Prevent click during drag
+            slider.addEventListener('click', function(e) {
+                if (slider.classList.contains('touch-dragging') || slider.classList.contains('mouse-dragging')) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                }
+            }, true);
+        })();
+
+    
+        
+        // ============ IMAGE LOAD HANDLER ============
+        (function() {
+            document.querySelectorAll('img[loading="lazy"]').forEach(function(img) {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', function() {
+                        this.classList.add('loaded');
+                    });
+                    img.addEventListener('error', function() {
+                        this.classList.add('loaded');
+                        this.style.opacity = '0.5';
+                    });
+                }
+            });
+        })();
+</script>
 </body>
 </html>
