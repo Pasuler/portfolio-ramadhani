@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 8mm 13mm 8mm 13mm;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1f2937;
+    background: #ffffff;
+    font-size: 9.7pt;
+    line-height: 1.40;
+  }
+  .header {
+    text-align: center;
+    border-bottom: 1.5px solid #111827;
+    padding-bottom: 9px;
+    margin-bottom: 7px;
+  }
+  h1 {
+    font-size: 17.5pt;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    color: #111827;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .contact-info {
+    font-size: 8.7pt;
+    color: #4b5563;
+    font-weight: 500;
+  }
+  .contact-info a {
+    color: #1f2937;
+    text-decoration: none;
+  }
+  .section {
+    margin-bottom: 10px;
+  }
+  .section:last-child {
+    margin-bottom: 0;
+  }
+  .section-title {
+    font-size: 11pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #111827;
+    border-bottom: 1px solid #d1d5db;
+    padding-bottom: 2px;
+    margin-bottom: 7px;
+  }
+  .entry {
+    margin-bottom: 6px;
+  }
+  .entry:last-child {
+    margin-bottom: 0;
+  }
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 9.7pt;
+  }
+  .entry-title {
+    font-weight: 700;
+    color: #111827;
+  }
+  .entry-date {
+    font-size: 8.7pt;
+    color: #4b5563;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .entry-subtitle {
+    font-size: 8.7pt;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 2px;
+  }
+  .entry-desc {
+    font-size: 8.8pt;
+    color: #4b5563;
+    line-height: 1.40;
+  }
+  ul.entry-bullets {
+    padding-left: 15px;
+    margin-top: 2px;
+  }
+  ul.entry-bullets li {
+    font-size: 8.8pt;
+    color: #374151;
+    line-height: 1.40;
+    margin-bottom: 2px;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .skill-group {
+    font-size: 8.7pt;
+    line-height: 1.39;
+    color: #374151;
+  }
+  .skill-group strong {
+    color: #111827;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Muhammad Ramadhani Pasulleri</h1>
+  <div class="contact-info">
+    Batu, Jawa Timur &nbsp;|&nbsp;
+    <a href="mailto:ramadhanipasulleri123@gmail.com">ramadhanipasulleri123@gmail.com</a> &nbsp;|&nbsp;
+    0895-3425-8692 &nbsp;|&nbsp;
+    <a href="https://linkedin.com/in/ramadhani-pasulleri-52922324b">linkedin.com/in/ramadhani-pasulleri-52922324b</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Tentang Saya</div>
+  <p class="entry-desc">
+    Mahasiswa Teknik Informatika Universitas Islam Negeri Maulana Malik Ibrahim Malang dengan spesialisasi Web Development (Laravel, JavaScript, Tailwind CSS) dan pengembangan sistem operasional full-stack. Berpengalaman merancang platform transaksi bisnis, otomasi sistem antrian digital, pengelolaan infrastruktur jaringan kantor, serta mengorkestrasikan program teknologi dan community development.
+  </p>
+</div>
+
+<div class="section">
+  <div class="section-title">Pendidikan</div>
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-title">Universitas Islam Negeri Maulana Malik Ibrahim Malang</span>
+      <span class="entry-date">2022 — 2026</span>
+    </div>
+    <div class="entry-subtitle">S1 Teknik Informatika</div>
+    <div class="entry-desc">Fokus Keilmuan: Web Application Engineering, Database Architecture, &amp; Computer Networks. Aktif dalam organisasi dan kepanitiaan teknologi kampus.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Pengalaman Kerja &amp; Praktik</div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-title">Garuda Indonesia — Denpasar Branch</span>
+      <span class="entry-date">2025</span>
+    </div>
+    <div class="entry-subtitle">IT Intern &middot; Predikat Sangat Baik</div>
+    <ul class="entry-bullets">
+      <li>Menganalisis, mengembangkan, dan menerapkan sistem antrian digital terintegrasi berbasis web untuk efisiensi alur layanan penumpang.</li>
+      <li>Mengimplementasikan sistem pelacakan logistik dan inventaris internal berbasis web secara terstruktur.</li>
+      <li>Melakukan maintenance infrastruktur jaringan, server kantor, serta troubleshooting sistem hardware dan software operasional.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-title">Lady Elisabeth Resto</span>
+      <span class="entry-date">2025 — 2026</span>
+    </div>
+    <div class="entry-subtitle">Manager Resto &amp; Finance</div>
+    <ul class="entry-bullets">
+      <li>Mengelola seluruh siklus operasional perangkat lunak Point-of-Sale (POS) kasir dan modul transaksi multi-operator.</li>
+      <li>Mengotomatisasi rekonsiliasi arus kas (cash flow), budgeting bahan baku berkala, dan penyusunan laporan keuangan bulanan terstruktur.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-title">Ponpes Salafiyah Roudlotur Ridlwan</span>
+      <span class="entry-date">2021 — 2026</span>
+    </div>
+    <div class="entry-subtitle">IT Support &amp; Administrator</div>
+    <ul class="entry-bullets">
+      <li>Mengelola basis data relasional berskala besar untuk pencatatan santri dan portal administrasi digital yayasan.</li>
+      <li>Menyusun laporan keuangan internal serta memastikan kepatuhan pelaporan perpajakan kelembagaan secara akurat.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Pengalaman Organisasi &amp; Kepemimpinan</div>
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-title">Google Developer Groups on Campus (GDGoC)</span>
+      <span class="entry-date">2023 — 2025</span>
+    </div>
+    <div class="entry-subtitle">Core Event Organizer</div>
+    <ul class="entry-bullets">
+      <li>Merancang, mengorkestrasikan, dan mengeksekusi roadmap program teknologi GDGoC 2024 (TechTalk, Info Session, dan Study Jam: Web &amp; UI/UX).</li>
+      <li>Bertindak sebagai technical moderator serta koordinator logistik utama dalam bootcamp pengembang komunitas.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Proyek Unggulan</div>
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-title">Sistem Antrian &amp; Operasional Garuda (Laravel, MySQL, Tailwind CSS)</span>
+    </div>
+    <div class="entry-desc">Aplikasi layanan pelanggan bandara berbasis web dengan pelacakan status tiket real-time dan audit logistik operasional.</div>
+  </div>
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-title">Sistem POS &amp; Finansial Restoran (Laravel, Alpine.js, SQLite/MySQL)</span>
+    </div>
+    <div class="entry-desc">Platform transaksi multi-shift aman terintegrasi perhitungan pajak otomatis (PPN 11%), hook payment gateway QRIS, dan routing cetak struk termal.</div>
+  </div>
+  <div class="entry">
+    <div class="entry-header">
+      <span class="entry-title">Analisa Saham Engine &amp; Technical Screener (Python, REST API)</span>
+    </div>
+    <div class="entry-desc">Engine kuantitatif otomatisasi sinyal teknikal pasar saham dengan visualisasi chart candlestick dan setup kalkulasi rasio risiko.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Sertifikasi &amp; Keahlian</div>
+  <div class="grid-2">
+    <div>
+      <div class="skill-group">
+        <strong>Sertifikasi Profesional:</strong>
+        <ul style="padding-left: 14px; margin-top: 2px;">
+          <li>Garuda Indonesia — Program Magang IT (Predikat Sangat Baik, 2025)</li>
+          <li>MCF — Public Speaking Tingkat Nasional</li>
+          <li>Dispora Jatim — Kewirausahaan Pemuda Peternak Milenial (2022)</li>
+          <li>ASEAN Digital Academy — AI Career Readiness Program</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group">
+        <strong>Keahlian Teknis &amp; Non-Teknis:</strong>
+        <p style="margin-top: 2px;"><strong>Bahasa &amp; Framework:</strong> PHP, Laravel, JavaScript, Python, Tailwind CSS, Bootstrap, React, SQL</p>
+        <p style="margin-top: 2px;"><strong>Tools &amp; Database:</strong> Git, GitHub, MySQL, SQLite, cPanel, Vite, Laragon, Linux OS</p>
+        <p style="margin-top: 2px;"><strong>Soft Skills:</strong> Public Speaking, Event Organizing, Kepemimpinan Tim, Manajemen Keuangan</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
